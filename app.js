@@ -5,10 +5,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const swaggerUI = require('swagger-ui-express');
-const swaggerDocument = require('./docs/openapi.json');
+const swaggerDocument = require('./docs/swagger.json');
 
-const indexRouter = require('./routes/index');
+const moviesRouter = require('./routes/movies');
+const peopleRouter = require('./routes/people');
 const usersRouter = require('./routes/users');
+const meRouter = require('./routes/me');
 
 const app = express();
 
@@ -45,10 +47,11 @@ app.get('/knex', function (req, res, next) {
   ).catch((err) => { console.log(err); throw err })
   res.send("Version Logged successfully");
 });
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/me', meRouter);
+app.use('/movies', moviesRouter);
+app.use('/people', peopleRouter);
+app.use('/user', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
