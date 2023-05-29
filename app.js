@@ -47,11 +47,11 @@ app.get('/knex', function (req, res, next) {
   ).catch((err) => { console.log(err); throw err })
   res.send("Version Logged successfully");
 });
-app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 app.use('/me', meRouter);
 app.use('/movies', moviesRouter);
 app.use('/people', peopleRouter);
 app.use('/user', usersRouter);
+app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
