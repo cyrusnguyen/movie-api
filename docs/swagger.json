@@ -27,6 +27,20 @@
           }
         }
       },
+      
+      "MissingBearer": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": "true"
+          },
+          "message": {
+            "type": "string",
+            "example": "Authorization header is malformed"
+          }
+        }
+      },
       "MissingAuthHeader": {
         "type": "object",
         "properties": {
@@ -1009,6 +1023,351 @@
                     "message": {
                       "type": "string",
                       "example": "Request body incomplete, refresh token required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenExpired"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded.",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Too many requests, please try again later."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{email}/profile": {
+      "get": {
+        "description": "Provide profile information",
+        "tags": ["Authentication"],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "The profile's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "cyrus@gmail.com"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Cyrus"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Nguyen"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "example": "2000-01-01"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Brisbane, Australia"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200 Not Owner": {
+            "description": "An object containing the profile without dob and address",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "cyrus@gmail.com"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Cyrus"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Nguyen"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid refresh request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Request body incomplete, refresh token required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenExpired"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded.",
+            "content": {
+              "text/html": {
+                "schema": {
+                  "type": "string",
+                  "example": "Too many requests, please try again later."
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Update profile information",
+        "tags": ["Authentication"],
+        "requestBody": {
+          "description": "An object containing the first name (firstName), last name (lastName), date of birth (dob) and address (address).",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string",
+                    "example": "Cyrus"
+                  },
+                  "lastName": {
+                    "type": "string",
+                    "example": "Nguyen"
+                  },
+                  "dob": {
+                    "type": "string",
+                    "example": "2000-01-01"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "Brisbane, Australia"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "email",
+            "in": "path",
+            "description": "The profile's email",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An object containing the updated profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "cyrus@gmail.com"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Cyrus"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Nguyen"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "example": "2000-01-01"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Brisbane, Australia"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "User is logged in with the wrong email ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Object does not contain all of the fields",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Request body incomplete: firstName, lastName, dob and address are required"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400 Not String": {
+            "description": "Any of the fields are not strings",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Request body invalid: firstName, lastName, dob and address must be strings only"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400 Wrong Date Format": {
+            "description": "If the date of birth is not a valid YYYY-MM-DD date (e.g. no April 31 or February 30, or February 29 on a non-leap year) or the date is not in the past",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Invalid input: dob must be a real date in format YYYY-MM-DD"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
                     }
                   }
                 }

@@ -4,11 +4,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { v4: uuid } = require('uuid');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
 router.post('/login', function (req, res, next) {
   // 1. Retrieve email and password from req.body
   var email = req.body.email;
@@ -42,7 +37,7 @@ router.post('/login', function (req, res, next) {
       // 2.1 If user does exist, verify if passwords match
       return bcrypt.compare(password, users[0].password);
     })
-    .then(match => {
+    .then(async match => {
       if (match === null) {
         return;
       }
@@ -56,10 +51,11 @@ router.post('/login', function (req, res, next) {
       }
       
       // 2.1.1 If passwords match, return JWT
-      
+      const bearerToken = await generateToken(req, "Bearer", email, bearerExpiresInSeconds);
+      const refreshToken = await generateToken(req, "Refresh", email, refreshExpiresInSeconds);
       res.status(200).json({
-        "bearerToken": generateToken("Bearer", email, bearerExpiresInSeconds),
-        "refreshToken": generateToken("Refresh", email, refreshExpiresInSeconds)
+        "bearerToken": bearerToken,
+        "refreshToken": refreshToken
       });
     })
     .catch(err => {
@@ -111,7 +107,7 @@ router.post('/register', async function (req, res, next) {
     })
 });
 
-router.post('/logout', function (req, res) {
+router.post('/logout', async function (req, res) {
 
   // Retrieve refreshToken from req.body
   const refreshToken = req.body.refreshToken;
@@ -125,14 +121,28 @@ router.post('/logout', function (req, res) {
     return;
   }
 
-  // 2. Invalidate refreshToken
-  // This can be done by adding the refreshToken to a blacklist, or by deleting it from the database if it is stored there.
-  // The implementation will vary depending on how you handle token storage and validation.
-
-  res.status(200).json({message: "Logout successful"});
+  // Invalidate refreshToken
+  await createTokensTableIfNotExists(req);
+  const token = await req.db.from('tokens').select("*").where('token', '=', req.body.refreshToken).first();
+  if (!token){
+    res.status(401).json({
+      error: true,
+      message: "JWT token has expired"
+    });
+    return;
+  }
+  await req.db.from('tokens').where({ token: req.body.refreshToken }).del().then(() => {
+    res.status(200).json({message: "Token successfully invalidated"});
+    return;
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({"error":true, "message": err});
+  })
+    
+  
 });
 
-router.post('/refresh', function (req, res) {
+router.post('/refresh', async function (req, res) {
   // Retrieve refreshToken from req.body
   const refreshToken = req.body.refreshToken;
 
@@ -145,24 +155,71 @@ router.post('/refresh', function (req, res) {
     return;
   }
 
-  // 2. Verify refreshToken
-  // This can be done by checking if the refreshToken is in a blacklist, or by verifying it against the database if it is stored there.
-  // The implementation will vary depending on how you handle token storage and validation.
+  // Verify refreshToken
+  await createTokensTableIfNotExists(req);
 
-  // 3. Generate new bearerToken
-  var newBearerToken = generateToken("Bearer", email);
+  const queryTokens = req.db.from("tokens").select("*").where("token", "=", refreshToken).first();
+  queryTokens
+    .then(async result => {
+      // If token not in the server return error
+      if(!result){
+        res.status(401).json({
+          "error": true,
+          "message": "JWT token has expired"
+        });
+        return;
+      }
+      else{
+        // If token exists, check the expiration
+        try {
+          jwt.verify(result.token, process.env.JWT_SECRET);
+        } catch (e) {
+            if (e.name === "TokenExpiredError") {
+                res.status(401).json({ error: true, message: "JWT token has expired" });
+                
+            } else {
+                res.status(401).json({ error: true, message: "Invalid JWT token" });
+            }
+            await req.db.from('tokens').where({ token: result.token }).del();
+            return;
+        }
+        // Generate new bearerToken
+        var newBearerToken = await generateToken(req, "Bearer", result.email, 600);
 
-  res.status(200).json({
-    "bearerToken": newBearerToken,
-    "refreshToken": refreshToken
-  });
+        res.status(200).json({
+          "bearerToken": newBearerToken,
+          "refreshToken": {
+            "token": result.token,
+            "token_type": "Refresh",
+            "expires_in": 86400
+          }
+        });
+        return;
+      }
+  }).catch(err => {
+    console.log(err);
+    res.status(500).json({"error": true, "message": err});
+  })
+
+  
+
+  
 });
 
 
-function generateToken(tokenType, email, expires_in){
+async function generateToken(req, tokenType, email, expires_in){
   var expiresIn = parseInt(expires_in) || 600;
   var exp = Math.floor(Date.now() / 1000) + expiresIn;
   var token = jwt.sign({ email, exp }, process.env.JWT_SECRET);
+  if (tokenType === 'Refresh'){
+    await createTokensTableIfNotExists(req);
+    await req.db.from("tokens").insert({ 
+      token: token, email: email, exp: exp})
+      .catch(e =>{
+        console.log(e)
+        res.status(500).json({ "error": true, message: e });
+    })
+  }
   return {
     "token": token,
     "token_type": tokenType,
@@ -171,7 +228,7 @@ function generateToken(tokenType, email, expires_in){
 }
 
 
-async function createUsersTableIfNotExists(req, res) {
+async function createUsersTableIfNotExists(req) {
   const exists = await req.db.schema.hasTable('users');
   if (!exists) {
     await req.db.schema.createTable('users', function(table) {
@@ -189,7 +246,19 @@ async function createUsersTableIfNotExists(req, res) {
 
 }
 
+async function createTokensTableIfNotExists(req) {
+  const exists = await req.db.schema.hasTable('tokens');
+  if (!exists) {
+    await req.db.schema.createTable('tokens', function(table) {
+      table.increments('id').primary();
+      table.string("token");
+      table.string("email");
+      table.string("exp");
+      table.timestamp('created_at').defaultTo(req.db.fn.now());
+    });
+  }
 
+}
 
 
 module.exports = router;
