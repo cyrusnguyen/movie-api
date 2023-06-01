@@ -3,10 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Movie information API",
-    "description": "This API provides access to publicly available data on a limited number of movies published from the year 1990 from the Internet Movie Database and other sources. The API endpoints and their usage are described in detail below.",
-    "contact": {
-      "email": "n10375694@qut.edu.au"
-    }
+    "description": "This API provides access to publicly available data on a limited number of movies published from the year 1990 from the Internet Movie Database and other sources. The API endpoints and their usage are described in detail below."
   },
   "components": {
     "securitySchemes": {
@@ -810,8 +807,28 @@
               }
             }
           },
-          "401": {
-            "description": "Log in failed",
+          "401 - Not Existed": {
+            "description": "Log in failed - Not Existed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": "true"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "There's no account associated with this email address or username."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401 - Wrong Credentials": {
+            "description": "Log in failed - Wrong Credentials",
             "content": {
               "application/json": {
                 "schema": {

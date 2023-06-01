@@ -82,42 +82,43 @@ router.get("/data/:id", function (req, res, next) {
     characters: 'p.characters'
   }, 'r.source', 'r.value')
   .where('b.tconst', '=', req.params.id).groupBy('b.tconst','p.nconst', 'p.name', 'p.category', 'p.characters', 'r.source', 'r.value')
-  .then((rows) => {const result = rows.reduce((acc, row) => {
-    const { title, year, runtime, country, boxoffice, poster, plot, id, category, name, source, value} = row;
-    const genres = row.genres.split(',') ;
-    const characters = row.characters.trim() === "" ? "" : JSON.parse(row.characters);
+  .then((rows) => {
+      const result = rows.reduce((acc, row) => {
+      const { title, year, runtime, country, boxoffice, poster, plot, id, category, name, source, value} = row;
+      const genres = row.genres.split(',') ;
+      const characters = row.characters.trim() === "" ? "" : JSON.parse(row.characters);
 
-    if (!acc.principals.some((p) => p.id === id)) {
-    acc.principals.push({ id, category, name, characters });
-    }
-    if (!acc.ratings.some((r) => r.source === source)) {
-    acc.ratings.push({ source, value });
-    }
-   
+      if (!acc.principals.some((p) => p.id === id)) {
+      acc.principals.push({ id, category, name, characters });
+      }
+      if (!acc.ratings.some((r) => r.source === source)) {
+      acc.ratings.push({ source, value });
+      }
     
-    acc = {
-      title,
-      year,
-      runtime,
-      genres,
-      country,
-      principals: acc.principals,
-      ratings: acc.ratings,
-      boxoffice,
-      poster,
-      plot
-    };
-   
-    return acc;
+      
+      acc = {
+        title,
+        year,
+        runtime,
+        genres,
+        country,
+        principals: acc.principals,
+        ratings: acc.ratings,
+        boxoffice,
+        poster,
+        plot
+      };
+    
+      return acc;
     }, {principals:[], ratings:[]});
   
-      res.status(200).json( result )
-      
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ "error": true, "message": "Database error"})
-    })
+  res.status(200).json( result )
+    
+  })
+  .catch((err) => {
+    console.log(err);
+    res.status(500).json({ "error": true, "message": "Database error"})
+  })
 });
 
 
