@@ -96,8 +96,8 @@ router.post('/register', async function (req, res, next) {
   }
 
   // Insert user into DB
-  const firstName = req.body.firstname || null;
-  const lastName = req.body.lastname || null;
+  const firstName = req.body.firstName || null;
+  const lastName = req.body.lastName || null;
   const dob = req.body.dob || null;
   const address = req.body.address || null;
   const saltRounds = 10;
@@ -176,8 +176,8 @@ async function createUsersTableIfNotExists(req, res) {
   if (!exists) {
     await req.db.schema.createTable('users', function(table) {
       table.uuid('id').primary().defaultTo(req.db.raw('(UUID())'));
-      table.string("firstname");
-      table.string("lastname");
+      table.string("firstName");
+      table.string("lastName");
       table.string("dob");
       table.string("address");
       table.string("email");
