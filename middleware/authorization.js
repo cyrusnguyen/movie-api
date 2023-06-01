@@ -1,12 +1,15 @@
 const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
-    if (!("authorization" in req.headers)
-        || !req.headers.authorization.match(/^Bearer /)
-    ) {
+    const authHeader = req.headers;
+    if (("authorization" in authHeader) && !authHeader.authorization.match(/^Bearer /)) {
+        res.status(401).json({ error: true, message: "Authorization header is malformed" });
+        return;
+    } 
+    if (!("authorization" in authHeader)) {
         res.status(401).json({ error: true, message: "Authorization header ('Bearer token') not found" });
         return;
     }
-    const token = req.headers.authorization.replace(/^Bearer /, "");
+    const token = authHeader.authorization.replace(/^Bearer /, "");
     try {
         jwt.verify(token, process.env.JWT_SECRET);
     } catch (e) {

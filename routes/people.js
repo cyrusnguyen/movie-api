@@ -4,15 +4,14 @@ var bcrypt = require("bcrypt");
 var jwt = require("jsonwebtoken");
 const authorization = require('../middleware/authorization');
 
-router.get("/:id", async function (req, res, next) {
+router.get("/:id", authorization, async function (req, res, next) {
   if (Object.keys(req.query).length > 0) {
     res.status(400).json({
       error: true,
       message: `Invalid query parameters: ${Object.keys(req.query).join(",")}. Query parameters are not permitted`,
     });
   }  
-  // .join('principals as p', 'b.tconst', 'p.tconst')
-  // .join('ratings as r', 'b.tconst', 'r.tconst')
+
   const namesResult = await req.db.from('names as n').select({
     name: 'n.primaryName',
     birthYear: 'n.birthYear',
@@ -47,7 +46,7 @@ router.get("/:id", async function (req, res, next) {
   .then((rows) => {
     const data = [];
     rows.map((row) => {
-      var characterArray = row.characters.trim() === "" ? "" : JSON.parse(row.characters)
+      var characterArray = row.characters.trim() === "" ? "" : JSON.parse(row.characters);
       data.push({
         "movieName": row.movieName, 
         "movieId": row.movieId,

@@ -11,6 +11,7 @@ const moviesRouter = require('./routes/movies');
 const peopleRouter = require('./routes/people');
 const usersRouter = require('./routes/users');
 const meRouter = require('./routes/me');
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -51,6 +52,10 @@ app.use('/me', meRouter);
 app.use('/movies', moviesRouter);
 app.use('/people', peopleRouter);
 app.use('/user', usersRouter);
+app.use('/user/:email/profile', function(req, res, next) {
+  req.email = req.params.email;
+  next();
+}, profileRouter);
 app.use('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
 
 // catch 404 and forward to error handler

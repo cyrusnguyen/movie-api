@@ -36,13 +36,16 @@ router.post('/login', function (req, res, next) {
           error: true,
           message: "There's no account associated with this email address or username."
         });
-        return;
+        return null;
       }
 
       // 2.1 If user does exist, verify if passwords match
       return bcrypt.compare(password, users[0].password);
     })
     .then(match => {
+      if (match === null) {
+        return;
+      }
       if (!match) {
         // 2.1.2 If passwords do not match, return error response
         res.status(401).json({
@@ -157,7 +160,7 @@ router.post('/refresh', function (req, res) {
 
 
 function generateToken(tokenType, email, expires_in){
-  var expiresIn = expires_in;
+  var expiresIn = parseInt(expires_in) || 600;
   var exp = Math.floor(Date.now() / 1000) + expiresIn;
   var token = jwt.sign({ email, exp }, process.env.JWT_SECRET);
   return {
@@ -172,7 +175,7 @@ async function createUsersTableIfNotExists(req, res) {
   const exists = await req.db.schema.hasTable('users');
   if (!exists) {
     await req.db.schema.createTable('users', function(table) {
-      table.string('id').primary().defaultTo(uuid());
+      table.uuid('id').primary().defaultTo(req.db.raw('(UUID())'));
       table.string("firstname");
       table.string("lastname");
       table.string("dob");

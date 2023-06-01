@@ -807,28 +807,8 @@
               }
             }
           },
-          "401 - Not Existed": {
-            "description": "Log in failed - Not Existed",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": "true"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "There's no account associated with this email address or username."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401 - Wrong Credentials": {
-            "description": "Log in failed - Wrong Credentials",
+          "401": {
+            "description": "Log in failed",
             "content": {
               "application/json": {
                 "schema": {
