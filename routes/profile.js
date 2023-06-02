@@ -1,10 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const authorization = require('../middleware/authorization');
+const authorizationPutProfile = require('../middleware/authorizationPutProfile');
 
-router.get('/', authorization, async function(req, res, next) {
+router.get('/', async function(req, res, next) {
     await createUsersTableIfNotExists(req, res);
     
     const user = await req.db.from('users').select('*').where('email', '=', req.email).first();
@@ -13,8 +12,20 @@ router.get('/', authorization, async function(req, res, next) {
         return;
     }
 
-    const token = req.headers.authorization.replace(/^Bearer /, "");
-    if (isOwner(token, req.email)){
+    // If unauthenticated, return 3 fields
+    const authHeader = req.headers;
+    if (!("authorization" in authHeader)){
+        res.status(200).json({
+            "email" : user.email,
+            "firstName" : user.firstName,
+            "lastName" : user.lastName
+        })
+        return;
+    }
+
+    // Otherwise, check the ownership
+    const token = authHeader.authorization.replace(/^Bearer /, "");
+    if (isOwner(token, req.email) === true){
         res.status(200).json({
             "email" : user.email,
             "firstName" : user.firstName,
@@ -35,9 +46,10 @@ router.get('/', authorization, async function(req, res, next) {
     }
 });
 
-router.put('/', authorization, async function(req, res, next) {
+router.put('/', authorizationPutProfile, async function(req, res, next) {
     await createUsersTableIfNotExists(req, res);
-
+    const date = new Date(req.body.dob) || null;
+    const today = new Date();
     // Check valid inputs
     if (!req.body.firstName ||
         !req.body.lastName ||
@@ -45,7 +57,7 @@ router.put('/', authorization, async function(req, res, next) {
         !req.body.address) {
         return res.status(400).json({
             error: true,
-            message: "Request body incomplete: firstName, lastName, dob and address are required"
+            message: "Request body incomplete: firstName, lastName, dob and address are required."
         });
     }else if (
         
@@ -56,13 +68,18 @@ router.put('/', authorization, async function(req, res, next) {
       ) {
         return res.status(400).json({
           error: true,
-          message: "Request body invalid: firstName, lastName, dob and address must be strings only"
+          message: "Request body invalid: firstName, lastName and address must be strings only."
         });
     }else if (!isValidDateFormat(req.body.dob)) {
         return res.status(400).json({
           error: true,
-          message: "Invalid input: dob must be a real date in format YYYY-MM-DD"
+          message: "Invalid input: dob must be a real date in format YYYY-MM-DD."
         });
+    }else if (date.getTime() > today.getTime()){
+        return res.status(400).json({
+            error: true,
+            message: "Invalid input: dob must be a date in the past."
+          });
     }
 
 
@@ -82,10 +99,13 @@ router.put('/', authorization, async function(req, res, next) {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName,
                 dob: req.body.dob,
-                address: req.body.address,})
+                address: req.body.address,
+                updated_at: req.db.fn.now()
+            })
                 .then(async () => {
-                    // After updaing, get user data to recheck
+                    // After updating, get user data to recheck
                     var updatedUser = await req.db.from("users").select("*").where('email', '=', req.email).first();
+
                     res.status(200).json({
                         "email" : updatedUser.email,
                         "firstName" : updatedUser.firstName,
@@ -142,8 +162,9 @@ function isOwner(token, email){
         } else {
             res.status(401).json({ error: true, message: "Invalid JWT token" });
         }
-        return null;
+        return;
     }
+    
 }
 
 // Check validation of date format
@@ -153,11 +174,13 @@ function isValidDateFormat(dateString){
     if (!dateString.match(regEx)) return false;  // Invalid format
     const date = new Date(dateString);
 
-    // Check if the date passed today.
-    const today = new Date();
-    if (date.getTime() > today.getTime()) return false;
-
-    return date instanceof Date && !isNaN(date);
+    //If date is in Date type and not null
+    if ((date instanceof Date) && !isNaN(date)){
+        // Check real date
+        const [year, month, day] = dateString.split('-');
+        const date = new Date(year, month - 1, day);
+        return date.getFullYear() == year && date.getMonth() + 1 == month && date.getDate() == day;
+    };
 }
 
 module.exports = router;

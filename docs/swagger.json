@@ -424,7 +424,7 @@
                         },
                         "message": {
                           "type": "string",
-                          "example": "Invalid query parameters: year. Query parameters are not permitted."
+                          "example": "Query parameters are not permitted."
                         }
                       }
                     }
@@ -558,7 +558,7 @@
                         },
                         "message": {
                           "type": "string",
-                          "example": "Invalid query parameters: year. Query parameters are not permitted."
+                          "example": "Query parameters are not permitted."
                         }
                       }
                     }
@@ -1307,7 +1307,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Request body incomplete: firstName, lastName, dob and address are required"
+                      "example": "Request body incomplete: firstName, lastName, dob and address are required."
                     }
                   }
                 }
@@ -1327,7 +1327,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Request body invalid: firstName, lastName, dob and address must be strings only"
+                      "example": "Request body invalid: firstName, lastName and address must be strings only."
                     }
                   }
                 }
@@ -1347,7 +1347,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "example": "Invalid input: dob must be a real date in format YYYY-MM-DD"
+                      "example": "Invalid input: dob must be a real date in format YYYY-MM-DD."
                     }
                   }
                 }

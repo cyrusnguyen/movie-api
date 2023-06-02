@@ -2,7 +2,11 @@ const jwt = require('jsonwebtoken');
 module.exports = function (req, res, next) {
     const authHeader = req.headers;
     
-    if (!("authorization" in authHeader) ||  !authHeader.authorization.match(/^Bearer /)) {
+    if (("authorization" in authHeader) && !authHeader.authorization.match(/^Bearer /)) {
+        res.status(401).json({ error: true, message: "Authorization header is malformed" });
+        return;
+    } 
+    if (!("authorization" in authHeader)) {
         res.status(401).json({ error: true, message: "Authorization header ('Bearer token') not found" });
         return;
     }

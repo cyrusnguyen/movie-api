@@ -116,28 +116,47 @@ router.post('/logout', async function (req, res) {
   if (!refreshToken) {
     res.status(400).json({
       error: true,
-      message: "Request body incomplete - refreshToken needed"
+      message: "Request body incomplete, refresh token required"
     });
+    return;
+  }
+  try{
+    jwt.verify(refreshToken, process.env.JWT_SECRET);
+  }catch (e){
+    if (e.name === "TokenExpiredError") {
+      res.status(401).json({ error: true, message: "JWT token has expired" });
+      
+    }else{
+      res.status(401).json({
+        error: true,
+        message: "Invalid JWT token"
+      });
+    }
     return;
   }
 
   // Invalidate refreshToken
   await createTokensTableIfNotExists(req);
   const token = await req.db.from('tokens').select("*").where('token', '=', req.body.refreshToken).first();
+  
+  
+  
   if (!token){
     res.status(401).json({
       error: true,
-      message: "JWT token has expired"
+      message: "Invalid JWT token"
     });
     return;
+  }else{
+    await req.db.from('tokens').where({ token: req.body.refreshToken }).del().then(() => {
+      res.status(200).json({"error": false, "message": "Token successfully invalidated"});
+      return;
+    }).catch(err => {
+      console.log(err);
+      res.status(500).json({"error":true, "message": err});
+    })
   }
-  await req.db.from('tokens').where({ token: req.body.refreshToken }).del().then(() => {
-    res.status(200).json({message: "Token successfully invalidated"});
-    return;
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({"error":true, "message": err});
-  })
+  
     
   
 });
@@ -165,7 +184,7 @@ router.post('/refresh', async function (req, res) {
       if(!result){
         res.status(401).json({
           "error": true,
-          "message": "JWT token has expired"
+          "message": "Invalid JWT token"
         });
         return;
       }

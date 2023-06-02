@@ -8,8 +8,9 @@ router.get("/:id", authorization, async function (req, res, next) {
   if (Object.keys(req.query).length > 0) {
     res.status(400).json({
       error: true,
-      message: `Invalid query parameters: ${Object.keys(req.query).join(",")}. Query parameters are not permitted`,
+      message: `Query parameters are not permitted.`,
     });
+    return;
   }  
 
   const namesResult = await req.db.from('names as n').select({
@@ -17,22 +18,22 @@ router.get("/:id", authorization, async function (req, res, next) {
     birthYear: 'n.birthYear',
     deathYear: 'n.deathYear',
     titles: 'n.knownForTitles'
-  }).where('n.nconst', '=', req.params.id)
-  if (namesResult.length === 0){
+  }).where('n.nconst', '=', req.params.id).first();
+  if (!namesResult) {
     res.status(404).json({
       error: true,
       message: `No record exists of a person with this ID`,
     });
+    return;
   }
-  const titleArray = namesResult[0].titles.split(',') || null;
-  const personName = namesResult[0].name;
-  const personBirthYear = namesResult[0].birthYear || null;
-  const personDeathYear = namesResult[0].deathYear || null;
+  const personName = namesResult.name;
+  const personBirthYear = namesResult.birthYear || null;
+  const personDeathYear = namesResult.deathYear || null;
 
-  req.db.from('basics as b')
-  .join('principals as p', function() {
+
+  req.db.from('principals as p')
+  .join('basics as b', function() {
     this.on('b.tconst', '=', 'p.tconst')
-    this.onIn('p.name', personName)
   })
   .select({
     movieName: 'b.primaryTitle', 
@@ -41,8 +42,8 @@ router.get("/:id", authorization, async function (req, res, next) {
   }, {
     characters: 'p.characters',
     category: 'p.category'
-  })
-  .whereIn('b.tconst', titleArray)
+  }
+  ).where('p.nconst', '=', req.params.id)
   .then((rows) => {
     const data = [];
     rows.map((row) => {
@@ -55,13 +56,12 @@ router.get("/:id", authorization, async function (req, res, next) {
         "imdbRating": parseFloat(row.imdbRating) || null,
       })
     })
+    console.log(rows.length, data.length)
     res.status(200).send( {
       "name": personName,
       "birthYear": personBirthYear,
       "deathYear": personDeathYear,
-      "roles": data
-    } )
-    
+      "roles": data    } )
   })
   .catch((err) => {
     console.log(err);

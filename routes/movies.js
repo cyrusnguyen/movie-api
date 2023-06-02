@@ -8,17 +8,26 @@ router.get('/search', async function (req, res, next) {
   var per_page = parseInt(req.query.per_page) || 100;
 
   //check if there are existed invalid params
-  if (!isNaN(req.query.year) && isNaN(parseInt(req.query.year))) {
+  if (/[^0-9]/.test(req.query.year) && req.query.year !== undefined) {
     res.status(400).json({
       error: true,
-      message: `Invalid year format. Format must be yyyy.`,
+      message: 'Invalid year format. Format must be yyyy.',
     });
-  } else {
+    return;
+  } else if (/[^0-9]/.test(req.query.page) && req.query.page !== undefined){
+    res.status(400).json({
+      error: true,
+      message: `Invalid page format. page must be a number.`,
+    });
+    return;
+  }else {
     var offset = (page - 1) * per_page;
+    
     var count = await req.db('basics')
     .where("primaryTitle", "like", `%${req.query.title || ''}%`)
     .where("year", "like", `%${req.query.year || ''}%`).count("* as total").first();
-
+    var prevPage = page > 1 ? page - 1 : null;
+    var nextPage = page < Math.ceil(count.total / per_page) ? page + 1 : null;
     req.db.from('basics').select("primaryTitle","year","tconst","imdbRating","rottenTomatoesRating","metacriticRating","rated")
     .where("primaryTitle", "like", `%${req.query.title || ''}%`)
     .where("year", "like", `%${req.query.year || ''}%`)
@@ -29,7 +38,7 @@ router.get('/search', async function (req, res, next) {
             "title": row.primaryTitle,
             "year": parseInt(row.year) || null,
             "imdbID": row.tconst,
-            "imdbRating": parseInt(row.imdbRating) || null,
+            "imdbRating": parseFloat(row.imdbRating) || null,
             "rottenTomatoesRating": parseInt(row.rottenTomatoesRating) || null,
             "metacriticRating": parseInt(row.metacriticRating) || null,
             "classification": row.rated,
@@ -40,8 +49,11 @@ router.get('/search', async function (req, res, next) {
           lastPage: Math.ceil(count.total / per_page),
           perPage: per_page,
           currentPage: page,
+          prevPage: prevPage,
+          nextPage: nextPage,
           from: offset,
-          to: offset + rows.length
+          to: offset + rows.length,
+          
 
         },
       })
@@ -56,16 +68,40 @@ router.get('/search', async function (req, res, next) {
 });
 
 
-router.get("/data/:id", function (req, res, next) {
+router.get("/data/:id", async function (req, res, next) {
   if (Object.keys(req.query).length > 0) {
     res.status(400).json({
       error: true,
-      message: `Invalid query parameters: ${Object.keys(req.query).join(",")}. Query parameters are not permitted`,
+      message: `Query parameters are not permitted.`,
     });
+    return;
   }
+
+  const ratingsResult = await req.db.from('ratings as r').select('r.source', 'r.value').where('r.tconst', '=', req.params.id)
+  const ratingsObj = ratingsResult.map((result) => {
+    var regex = /(\d+(?:\.\d+)?)/g;
+    var filteredValue = parseFloat(result.value.match(regex)) || null;
+    return { source: result.source, value: filteredValue }
+  })
+
+  const principalsResult = await req.db.from('principals as p').select({
+    id: 'p.nconst', 
+    category:'p.category', 
+    name:'p.name', 
+    characters: 'p.characters'
+  }).where('p.tconst', '=', req.params.id)
+  const principalsObj = principalsResult.map((result) => {
+    var filteredCharacters = result.characters.trim() === "" ? "" : JSON.parse(result.characters);
+    
+    return {
+      "id": result.id,
+      "category": result. category,
+      "name": result.name,
+      "characters": filteredCharacters
+    }
+  })
+
   req.db.from('basics as b')
-  .join('principals as p', 'b.tconst', 'p.tconst')
-  .join('ratings as r', 'b.tconst', 'r.tconst')
   .select({
     title: 'b.primaryTitle',
     year: 'b.year',
@@ -75,44 +111,28 @@ router.get("/data/:id", function (req, res, next) {
     boxoffice: 'b.boxoffice',
     poster: 'b.poster',
     plot:'b.plot'
-  }, {
-    id: 'p.nconst', 
-    category:'p.category', 
-    name:'p.name', 
-    characters: 'p.characters'
-  }, 'r.source', 'r.value')
-  .where('b.tconst', '=', req.params.id).groupBy('b.tconst','p.nconst', 'p.name', 'p.category', 'p.characters', 'r.source', 'r.value')
+  })
+  .where('b.tconst', '=', req.params.id).first()
   .then((rows) => {
-      const result = rows.reduce((acc, row) => {
-      const { title, year, runtime, country, boxoffice, poster, plot, id, category, name, source, value} = row;
-      const genres = row.genres.split(',') ;
-      const characters = row.characters.trim() === "" ? "" : JSON.parse(row.characters);
-
-      if (!acc.principals.some((p) => p.id === id)) {
-      acc.principals.push({ id, category, name, characters });
+      if (!rows){
+        res.status(404).json({ "error": true, "message": "No movies found."});
+        return;
       }
-      if (!acc.ratings.some((r) => r.source === source)) {
-      acc.ratings.push({ source, value });
+      var result = {
+        "title": rows.title,
+        "year": rows.year,
+        "runtime": rows.runtime,
+        "genres": rows.genres.split(','),
+        "country": rows.country,
+        "principals": principalsObj,
+        "ratings": ratingsObj,
+        "boxoffice": rows.boxoffice,
+        "poster": rows.poster,
+        "plot": rows.plot
       }
-    
-      
-      acc = {
-        title,
-        year,
-        runtime,
-        genres,
-        country,
-        principals: acc.principals,
-        ratings: acc.ratings,
-        boxoffice,
-        poster,
-        plot
-      };
-    
-      return acc;
-    }, {principals:[], ratings:[]});
   
-  res.status(200).json( result )
+    res.status(200).json( result )
+    return;
     
   })
   .catch((err) => {
