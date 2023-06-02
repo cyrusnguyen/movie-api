@@ -56,7 +56,8 @@ app.use('/user/:email/profile', function(req, res, next) {
   req.email = req.params.email;
   next();
 }, profileRouter);
-app.get('/', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+app.use('/', swaggerUI.serve);
+app.get('/', swaggerUI.setup(swaggerDocument));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -64,9 +65,7 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-app.all('*', (req, res) => {
-  res.status(404).send('<h1>404! Page not found</h1>');
-});
+
 
 // error handler
 app.use(function (err, req, res, next) {
