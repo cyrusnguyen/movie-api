@@ -14,6 +14,8 @@ const usersRouter = require('./routes/users');
 const meRouter = require('./routes/me');
 const profileRouter = require('./routes/profile');
 
+const CSS_URL =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.6.2/swagger-ui.min.css";
 const app = express();
 
 const options = require('./knexfile');
@@ -56,7 +58,7 @@ app.use('/user/:email/profile', function (req, res, next) {
   next();
 }, profileRouter);
 app.use('/', swaggerUI.serve);
-app.get('/', swaggerUI.setup(swaggerDocument));
+app.get('/', swaggerUI.setup(swaggerDocument, { customCssUrl: CSS_URL }));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
