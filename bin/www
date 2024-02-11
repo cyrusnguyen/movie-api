@@ -6,7 +6,6 @@
 
 var app = require('../app');
 var debug = require('debug')('assignment3-server-side:server');
-var https = require('https');
 
 /**
  * Get port from environment and store in Express.
@@ -15,17 +14,7 @@ var https = require('https');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
-
-const fs = require('fs');
-const credentials = {
-  key: fs.readFileSync("selfsigned.key","utf8"),
-  cert: fs.readFileSync("selfsigned.crt","utf8")
-};
-
-const server = https.createServer(credentials, app);
+const server = app;
 
 /**
  * Listen on provided port, on all network interfaces.
