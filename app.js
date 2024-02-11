@@ -1,3 +1,4 @@
+require("./bin/www");
 require("dotenv").config();
 const createError = require('http-errors');
 const express = require('express');
@@ -33,7 +34,7 @@ logger.token('res', (req, res) => {
   const headers = {}
   res.getHeaderNames().map(h => headers[h] = res.getHeader(h))
   return JSON.stringify(headers)
-}) 
+})
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -52,7 +53,7 @@ app.use('/me', meRouter);
 app.use('/movies', moviesRouter);
 app.use('/people', peopleRouter);
 app.use('/user', usersRouter);
-app.use('/user/:email/profile', function(req, res, next) {
+app.use('/user/:email/profile', function (req, res, next) {
   req.email = req.params.email;
   next();
 }, profileRouter);

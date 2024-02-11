@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
         {
-            "bin": "www",
+            "src": "app.js",
             "use": "@now/node"
         }
     ],
