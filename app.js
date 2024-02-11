@@ -1,4 +1,4 @@
-require("./bin/www");
+
 require("dotenv").config();
 const createError = require('http-errors');
 const express = require('express');
@@ -26,7 +26,6 @@ app.use((req, res, next) => {
 });
 
 
-// view engine setup
 
 logger.token('res', (req, res) => {
   const headers = {}
