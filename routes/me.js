@@ -1,11 +1,13 @@
-var express = require('express');
-var router = express.Router();
+'use strict';
 
+const express = require('express');
 
-router.get("/", function (req, res, next) {
-  return res.json({
-    full_name: "Hoang Minh Nguyen (Cyrus)",
-    student_number: "n10375694",
+const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.json({
+    full_name: 'Hoang Minh Nguyen (Cyrus)',
+    student_number: 'n10375694',
   });
 });
 

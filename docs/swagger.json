@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "1.0.0",
+    "version": "2.0.0",
     "title": "Movie information API",
-    "description": "This API provides access to publicly available data on a limited number of movies published from the year 1990 from the Internet Movie Database and other sources. The API endpoints and their usage are described in detail below."
+    "description": "This API provides access to a catalogue of movies, the people who made them, and ratings from several sources, together with JWT-based user accounts.\n\n**Note:** the original IMDB-derived dataset was hosted on PlanetScale, whose free tier shut down in April 2024. The API now ships with a small curated sample catalogue in SQLite so it runs with no external services. Titles, years and credits are real; ratings and box-office figures are approximate."
   },
   "components": {
     "securitySchemes": {
@@ -27,7 +27,6 @@
           }
         }
       },
-      
       "MissingBearer": {
         "type": "object",
         "properties": {
@@ -92,14 +91,81 @@
             "example": "Invalid page format. page must be a number."
           }
         }
+      },
+      "TooManyRequests": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Too many attempts from this address. Please try again later."
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Password must be at least 8 characters"
+          }
+        }
+      },
+      "Forbidden": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Forbidden"
+          }
+        }
+      },
+      "NotFound": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "No record exists of a movie with this ID"
+          }
+        }
+      },
+      "ServerError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "boolean",
+            "example": true
+          },
+          "message": {
+            "type": "string",
+            "example": "Internal server error"
+          }
+        }
       }
     }
   },
   "paths": {
     "/movies/search": {
       "get": {
-        "tags": ["Movies"],
-        "description": "Returns a list of movie data. The list is arranged by imdbId, in ascending order.",
+        "tags": [
+          "Movies"
+        ],
+        "description": "Search the catalogue. Results are paginated; `per_page` is capped at 100.",
         "parameters": [
           {
             "name": "title",
@@ -113,19 +179,70 @@
           {
             "name": "year",
             "in": "query",
-            "description": "The year of initial release of the movie",
+            "description": "Year of initial release, as four digits.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}$"
+            }
+          },
+          {
+            "name": "genre",
+            "in": "query",
+            "description": "Restrict results to films tagged with this genre, e.g. `Drama`.",
             "required": false,
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "page",
+            "name": "minRating",
             "in": "query",
-            "description": "Page number",
+            "description": "Only return films with an IMDB rating at or above this value.",
             "required": false,
             "schema": {
-              "type": "string"
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Result ordering.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "relevance",
+                "rating",
+                "newest",
+                "oldest"
+              ],
+              "default": "relevance"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number, starting at 1.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            }
+          },
+          {
+            "name": "per_page",
+            "in": "query",
+            "description": "Results per page. Values above 100 are clamped to 100.",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
             }
           }
         ],
@@ -223,13 +340,25 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            }
           }
         }
       }
     },
     "/movies/data/{imdbID}": {
       "get": {
-        "tags": ["Movies"],
+        "tags": [
+          "Movies"
+        ],
         "description": "Get data for a movie by imdbID",
         "operationId": "getMovieData",
         "parameters": [
@@ -269,7 +398,11 @@
                         "type": "string",
                         "example": "Action"
                       },
-                      "example": ["Action", "Adventure", "Drama"]
+                      "example": [
+                        "Action",
+                        "Adventure",
+                        "Drama"
+                      ]
                     },
                     "country": {
                       "type": "string",
@@ -300,7 +433,12 @@
                             }
                           }
                         },
-                        "required": ["id", "name", "category", "characters"]
+                        "required": [
+                          "id",
+                          "name",
+                          "category",
+                          "characters"
+                        ]
                       },
                       "example": [
                         {
@@ -313,25 +451,33 @@
                           "id": "nm0001772",
                           "category": "actor",
                           "name": "Patrick Stewart",
-                          "characters": ["Picard"]
+                          "characters": [
+                            "Picard"
+                          ]
                         },
                         {
                           "id": "nm0000408",
                           "category": "actor",
                           "name": "Jonathan Frakes",
-                          "characters": ["Riker"]
+                          "characters": [
+                            "Riker"
+                          ]
                         },
                         {
                           "id": "nm0000653",
                           "category": "actor",
                           "name": "Brent Spiner",
-                          "characters": ["Data"]
+                          "characters": [
+                            "Data"
+                          ]
                         },
                         {
                           "id": "nm0000996",
                           "category": "actor",
                           "name": "LeVar Burton",
-                          "characters": ["Geordi"]
+                          "characters": [
+                            "Geordi"
+                          ]
                         },
                         {
                           "id": "nm0734472",
@@ -423,21 +569,11 @@
             }
           },
           "404": {
-            "description": "The requested movie could not be found",
+            "description": "Unknown film",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": "true"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "No record exists of a movie with this ID"
-                    }
-                  }
+                  "$ref": "#/components/schemas/NotFound"
                 }
               }
             }
@@ -447,7 +583,9 @@
     },
     "/people/{id}": {
       "get": {
-        "tags": ["People"],
+        "tags": [
+          "People"
+        ],
         "description": "Get information about a person (actor, writer, director etc.) from their IMDB ID.",
         "parameters": [
           {
@@ -590,8 +728,10 @@
     },
     "/user/register": {
       "post": {
-        "tags": ["Authentication"],
-        "description": "Creates a new user account. A request body containing the user to be registered must be sent.",
+        "tags": [
+          "Authentication"
+        ],
+        "description": "Create an account. Passwords must be at least 8 characters.",
         "requestBody": {
           "description": "An object containing the email and password of the user to be registered.",
           "required": true,
@@ -631,21 +771,11 @@
             }
           },
           "400": {
-            "description": "Bad request",
+            "description": "Missing or invalid email/password",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": "true"
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Request body incomplete, both email and password are required"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ValidationError"
                 }
               }
             }
@@ -669,14 +799,26 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            }
           }
         }
       }
     },
     "/user/login": {
       "post": {
-        "description": "Log in to an existing user account. A request body containing the user credentials must be sent. The longExpiry bool is a setting for development use only that makes both tokens expire after a year.",
-        "tags": ["Authentication"],
+        "description": "Exchange credentials for a bearer token (10 minutes) and a refresh token (24 hours, or 7 days with `longExpiry`). Token lifetimes are fixed by the server.",
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "The credentials of the user to log in.",
           "required": true,
@@ -695,15 +837,8 @@
                   },
                   "longExpiry": {
                     "type": "boolean",
-                    "example": "false"
-                  },
-                  "bearerExpiresInSeconds": {
-                    "type": "number",
-                    "example": 600
-                  },
-                  "refreshExpiresInSeconds": {
-                    "type": "boolean",
-                    "example": 86400
+                    "example": false,
+                    "description": "Request a 7-day refresh token instead of the default 24 hours."
                   }
                 }
               }
@@ -796,14 +931,26 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            }
           }
         }
       }
     },
     "/user/refresh": {
       "post": {
-        "description": "Obtain a new bearer token by using a refresh token",
-        "tags": ["Authentication"],
+        "description": "Exchange a refresh token for a new bearer token and a **new** refresh token. The submitted token is retired immediately. Presenting a retired token revokes every token issued from the same login.",
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "The refresh token",
           "required": true,
@@ -897,6 +1044,16 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TooManyRequests"
+                }
+              }
+            }
           }
         }
       }
@@ -904,7 +1061,9 @@
     "/user/logout": {
       "post": {
         "description": "Log the user out, invalidating the refresh token",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "The refresh token",
           "required": true,
@@ -979,7 +1138,9 @@
     "/user/{email}/profile": {
       "get": {
         "description": "Provide profile information",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "parameters": [
           {
             "name": "email",
@@ -1024,30 +1185,6 @@
               }
             }
           },
-          "200 Not Owner": {
-            "description": "An object containing the profile without dob and address",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "email": {
-                      "type": "string",
-                      "example": "cyrus@gmail.com"
-                    },
-                    "firstName": {
-                      "type": "string",
-                      "example": "Cyrus"
-                    },
-                    "lastName": {
-                      "type": "string",
-                      "example": "Nguyen"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "400": {
             "description": "Invalid refresh request",
             "content": {
@@ -1064,6 +1201,16 @@
                       "example": "Request body incomplete, refresh token required"
                     }
                   }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenExpired"
                 }
               }
             }
@@ -1088,12 +1235,26 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+          "200 Not Owner": {
+            "description": "An object containing the profile without dob and address",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/TokenExpired"
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "example": "cyrus@gmail.com"
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "example": "Cyrus"
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "example": "Nguyen"
+                    }
+                  }
                 }
               }
             }
@@ -1102,7 +1263,9 @@
       },
       "put": {
         "description": "Update profile information",
-        "tags": ["Authentication"],
+        "tags": [
+          "Authentication"
+        ],
         "requestBody": {
           "description": "An object containing the first name (firstName), last name (lastName), date of birth (dob) and address (address).",
           "required": true,
@@ -1181,26 +1344,6 @@
               }
             }
           },
-          "403": {
-            "description": "User is logged in with the wrong email ",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Forbidden"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "400": {
             "description": "Object does not contain all of the fields",
             "content": {
@@ -1215,6 +1358,46 @@
                     "message": {
                       "type": "string",
                       "example": "Request body incomplete: firstName, lastName, dob and address are required."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenExpired"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Authenticated as a different user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Profile not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "User not found"
                     }
                   }
                 }
@@ -1260,39 +1443,52 @@
                 }
               }
             }
-          },
-          "404": {
-            "description": "Profile not found",
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Liveness and database connectivity check",
+        "responses": {
+          "200": {
+            "description": "API and database are reachable",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "error": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "message": {
+                    "status": {
                       "type": "string",
-                      "example": "User not found"
+                      "example": "ok"
+                    },
+                    "database": {
+                      "type": "string",
+                      "example": "up"
                     }
                   }
                 }
               }
             }
           },
-          "401": {
-            "description": "Unauthorized. Click on 'Schema' below to see the possible error responses.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TokenExpired"
-                }
-              }
-            }
+          "503": {
+            "description": "Database unreachable"
           }
         }
       }
     }
-  }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development"
+    },
+    {
+      "url": "/",
+      "description": "Same origin as these docs"
+    }
+  ]
 }

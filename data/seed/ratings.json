@@ -1,0 +1,1472 @@
+[
+  {
+    "tconst": "tt0111161",
+    "source": "Internet Movie Database",
+    "value": "9.3/10"
+  },
+  {
+    "tconst": "tt0111161",
+    "source": "Rotten Tomatoes",
+    "value": "89%"
+  },
+  {
+    "tconst": "tt0111161",
+    "source": "Metacritic",
+    "value": "82/100"
+  },
+  {
+    "tconst": "tt0110912",
+    "source": "Internet Movie Database",
+    "value": "8.9/10"
+  },
+  {
+    "tconst": "tt0110912",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0110912",
+    "source": "Metacritic",
+    "value": "95/100"
+  },
+  {
+    "tconst": "tt0108052",
+    "source": "Internet Movie Database",
+    "value": "9.0/10"
+  },
+  {
+    "tconst": "tt0108052",
+    "source": "Rotten Tomatoes",
+    "value": "98%"
+  },
+  {
+    "tconst": "tt0108052",
+    "source": "Metacritic",
+    "value": "95/100"
+  },
+  {
+    "tconst": "tt0109830",
+    "source": "Internet Movie Database",
+    "value": "8.8/10"
+  },
+  {
+    "tconst": "tt0109830",
+    "source": "Rotten Tomatoes",
+    "value": "74%"
+  },
+  {
+    "tconst": "tt0109830",
+    "source": "Metacritic",
+    "value": "82/100"
+  },
+  {
+    "tconst": "tt0102926",
+    "source": "Internet Movie Database",
+    "value": "8.6/10"
+  },
+  {
+    "tconst": "tt0102926",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt0102926",
+    "source": "Metacritic",
+    "value": "86/100"
+  },
+  {
+    "tconst": "tt0114369",
+    "source": "Internet Movie Database",
+    "value": "8.6/10"
+  },
+  {
+    "tconst": "tt0114369",
+    "source": "Rotten Tomatoes",
+    "value": "82%"
+  },
+  {
+    "tconst": "tt0114369",
+    "source": "Metacritic",
+    "value": "65/100"
+  },
+  {
+    "tconst": "tt0137523",
+    "source": "Internet Movie Database",
+    "value": "8.8/10"
+  },
+  {
+    "tconst": "tt0137523",
+    "source": "Rotten Tomatoes",
+    "value": "79%"
+  },
+  {
+    "tconst": "tt0137523",
+    "source": "Metacritic",
+    "value": "67/100"
+  },
+  {
+    "tconst": "tt0133093",
+    "source": "Internet Movie Database",
+    "value": "8.7/10"
+  },
+  {
+    "tconst": "tt0133093",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt0133093",
+    "source": "Metacritic",
+    "value": "73/100"
+  },
+  {
+    "tconst": "tt0120815",
+    "source": "Internet Movie Database",
+    "value": "8.6/10"
+  },
+  {
+    "tconst": "tt0120815",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0120815",
+    "source": "Metacritic",
+    "value": "91/100"
+  },
+  {
+    "tconst": "tt0120737",
+    "source": "Internet Movie Database",
+    "value": "8.9/10"
+  },
+  {
+    "tconst": "tt0120737",
+    "source": "Rotten Tomatoes",
+    "value": "91%"
+  },
+  {
+    "tconst": "tt0120737",
+    "source": "Metacritic",
+    "value": "92/100"
+  },
+  {
+    "tconst": "tt0167261",
+    "source": "Internet Movie Database",
+    "value": "8.8/10"
+  },
+  {
+    "tconst": "tt0167261",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt0167261",
+    "source": "Metacritic",
+    "value": "87/100"
+  },
+  {
+    "tconst": "tt0167260",
+    "source": "Internet Movie Database",
+    "value": "9.0/10"
+  },
+  {
+    "tconst": "tt0167260",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0167260",
+    "source": "Metacritic",
+    "value": "94/100"
+  },
+  {
+    "tconst": "tt0468569",
+    "source": "Internet Movie Database",
+    "value": "9.0/10"
+  },
+  {
+    "tconst": "tt0468569",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt0468569",
+    "source": "Metacritic",
+    "value": "84/100"
+  },
+  {
+    "tconst": "tt0372784",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0372784",
+    "source": "Rotten Tomatoes",
+    "value": "84%"
+  },
+  {
+    "tconst": "tt0372784",
+    "source": "Metacritic",
+    "value": "70/100"
+  },
+  {
+    "tconst": "tt1375666",
+    "source": "Internet Movie Database",
+    "value": "8.8/10"
+  },
+  {
+    "tconst": "tt1375666",
+    "source": "Rotten Tomatoes",
+    "value": "87%"
+  },
+  {
+    "tconst": "tt1375666",
+    "source": "Metacritic",
+    "value": "74/100"
+  },
+  {
+    "tconst": "tt0816692",
+    "source": "Internet Movie Database",
+    "value": "8.7/10"
+  },
+  {
+    "tconst": "tt0816692",
+    "source": "Rotten Tomatoes",
+    "value": "73%"
+  },
+  {
+    "tconst": "tt0816692",
+    "source": "Metacritic",
+    "value": "74/100"
+  },
+  {
+    "tconst": "tt0209144",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt0209144",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt0209144",
+    "source": "Metacritic",
+    "value": "83/100"
+  },
+  {
+    "tconst": "tt0482571",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0482571",
+    "source": "Rotten Tomatoes",
+    "value": "76%"
+  },
+  {
+    "tconst": "tt0482571",
+    "source": "Metacritic",
+    "value": "66/100"
+  },
+  {
+    "tconst": "tt0172495",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0172495",
+    "source": "Rotten Tomatoes",
+    "value": "80%"
+  },
+  {
+    "tconst": "tt0172495",
+    "source": "Metacritic",
+    "value": "67/100"
+  },
+  {
+    "tconst": "tt0338013",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0338013",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0338013",
+    "source": "Metacritic",
+    "value": "89/100"
+  },
+  {
+    "tconst": "tt0407887",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0407887",
+    "source": "Rotten Tomatoes",
+    "value": "90%"
+  },
+  {
+    "tconst": "tt0407887",
+    "source": "Metacritic",
+    "value": "85/100"
+  },
+  {
+    "tconst": "tt0993846",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0993846",
+    "source": "Rotten Tomatoes",
+    "value": "80%"
+  },
+  {
+    "tconst": "tt0993846",
+    "source": "Metacritic",
+    "value": "75/100"
+  },
+  {
+    "tconst": "tt1130884",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt1130884",
+    "source": "Rotten Tomatoes",
+    "value": "69%"
+  },
+  {
+    "tconst": "tt1130884",
+    "source": "Metacritic",
+    "value": "63/100"
+  },
+  {
+    "tconst": "tt0361748",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0361748",
+    "source": "Rotten Tomatoes",
+    "value": "89%"
+  },
+  {
+    "tconst": "tt0361748",
+    "source": "Metacritic",
+    "value": "69/100"
+  },
+  {
+    "tconst": "tt1853728",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt1853728",
+    "source": "Rotten Tomatoes",
+    "value": "86%"
+  },
+  {
+    "tconst": "tt1853728",
+    "source": "Metacritic",
+    "value": "81/100"
+  },
+  {
+    "tconst": "tt2582802",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt2582802",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt2582802",
+    "source": "Metacritic",
+    "value": "89/100"
+  },
+  {
+    "tconst": "tt3783958",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt3783958",
+    "source": "Rotten Tomatoes",
+    "value": "91%"
+  },
+  {
+    "tconst": "tt3783958",
+    "source": "Metacritic",
+    "value": "94/100"
+  },
+  {
+    "tconst": "tt6751668",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt6751668",
+    "source": "Rotten Tomatoes",
+    "value": "99%"
+  },
+  {
+    "tconst": "tt6751668",
+    "source": "Metacritic",
+    "value": "96/100"
+  },
+  {
+    "tconst": "tt1291584",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt1291584",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt1291584",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt1392190",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt1392190",
+    "source": "Rotten Tomatoes",
+    "value": "97%"
+  },
+  {
+    "tconst": "tt1392190",
+    "source": "Metacritic",
+    "value": "90/100"
+  },
+  {
+    "tconst": "tt2267998",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt2267998",
+    "source": "Rotten Tomatoes",
+    "value": "87%"
+  },
+  {
+    "tconst": "tt2267998",
+    "source": "Metacritic",
+    "value": "79/100"
+  },
+  {
+    "tconst": "tt0114814",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0114814",
+    "source": "Rotten Tomatoes",
+    "value": "88%"
+  },
+  {
+    "tconst": "tt0114814",
+    "source": "Metacritic",
+    "value": "77/100"
+  },
+  {
+    "tconst": "tt0169547",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0169547",
+    "source": "Rotten Tomatoes",
+    "value": "87%"
+  },
+  {
+    "tconst": "tt0169547",
+    "source": "Metacritic",
+    "value": "84/100"
+  },
+  {
+    "tconst": "tt0253474",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0253474",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt0253474",
+    "source": "Metacritic",
+    "value": "85/100"
+  },
+  {
+    "tconst": "tt0405094",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt0405094",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0405094",
+    "source": "Metacritic",
+    "value": "89/100"
+  },
+  {
+    "tconst": "tt0245429",
+    "source": "Internet Movie Database",
+    "value": "8.6/10"
+  },
+  {
+    "tconst": "tt0245429",
+    "source": "Rotten Tomatoes",
+    "value": "96%"
+  },
+  {
+    "tconst": "tt0245429",
+    "source": "Metacritic",
+    "value": "96/100"
+  },
+  {
+    "tconst": "tt0347149",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0347149",
+    "source": "Rotten Tomatoes",
+    "value": "87%"
+  },
+  {
+    "tconst": "tt0347149",
+    "source": "Metacritic",
+    "value": "82/100"
+  },
+  {
+    "tconst": "tt0096283",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0096283",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt0096283",
+    "source": "Metacritic",
+    "value": "86/100"
+  },
+  {
+    "tconst": "tt0114709",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0114709",
+    "source": "Rotten Tomatoes",
+    "value": "100%"
+  },
+  {
+    "tconst": "tt0114709",
+    "source": "Metacritic",
+    "value": "96/100"
+  },
+  {
+    "tconst": "tt0435761",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0435761",
+    "source": "Rotten Tomatoes",
+    "value": "98%"
+  },
+  {
+    "tconst": "tt0435761",
+    "source": "Metacritic",
+    "value": "92/100"
+  },
+  {
+    "tconst": "tt0198781",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0198781",
+    "source": "Rotten Tomatoes",
+    "value": "96%"
+  },
+  {
+    "tconst": "tt0198781",
+    "source": "Metacritic",
+    "value": "79/100"
+  },
+  {
+    "tconst": "tt0266543",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0266543",
+    "source": "Rotten Tomatoes",
+    "value": "99%"
+  },
+  {
+    "tconst": "tt0266543",
+    "source": "Metacritic",
+    "value": "90/100"
+  },
+  {
+    "tconst": "tt0910970",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt0910970",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt0910970",
+    "source": "Metacritic",
+    "value": "95/100"
+  },
+  {
+    "tconst": "tt1049413",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt1049413",
+    "source": "Rotten Tomatoes",
+    "value": "98%"
+  },
+  {
+    "tconst": "tt1049413",
+    "source": "Metacritic",
+    "value": "88/100"
+  },
+  {
+    "tconst": "tt2096673",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt2096673",
+    "source": "Rotten Tomatoes",
+    "value": "98%"
+  },
+  {
+    "tconst": "tt2096673",
+    "source": "Metacritic",
+    "value": "94/100"
+  },
+  {
+    "tconst": "tt0317705",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt0317705",
+    "source": "Rotten Tomatoes",
+    "value": "97%"
+  },
+  {
+    "tconst": "tt0317705",
+    "source": "Metacritic",
+    "value": "90/100"
+  },
+  {
+    "tconst": "tt0382932",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0382932",
+    "source": "Rotten Tomatoes",
+    "value": "96%"
+  },
+  {
+    "tconst": "tt0382932",
+    "source": "Metacritic",
+    "value": "96/100"
+  },
+  {
+    "tconst": "tt0892769",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0892769",
+    "source": "Rotten Tomatoes",
+    "value": "99%"
+  },
+  {
+    "tconst": "tt0892769",
+    "source": "Metacritic",
+    "value": "75/100"
+  },
+  {
+    "tconst": "tt0245712",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0245712",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0245712",
+    "source": "Metacritic",
+    "value": "83/100"
+  },
+  {
+    "tconst": "tt1663202",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt1663202",
+    "source": "Rotten Tomatoes",
+    "value": "78%"
+  },
+  {
+    "tconst": "tt1663202",
+    "source": "Metacritic",
+    "value": "76/100"
+  },
+  {
+    "tconst": "tt2278388",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt2278388",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt2278388",
+    "source": "Metacritic",
+    "value": "88/100"
+  },
+  {
+    "tconst": "tt0265666",
+    "source": "Internet Movie Database",
+    "value": "7.6/10"
+  },
+  {
+    "tconst": "tt0265666",
+    "source": "Rotten Tomatoes",
+    "value": "81%"
+  },
+  {
+    "tconst": "tt0265666",
+    "source": "Metacritic",
+    "value": "76/100"
+  },
+  {
+    "tconst": "tt0286716",
+    "source": "Internet Movie Database",
+    "value": "7.4/10"
+  },
+  {
+    "tconst": "tt0286716",
+    "source": "Rotten Tomatoes",
+    "value": "90%"
+  },
+  {
+    "tconst": "tt0286716",
+    "source": "Metacritic",
+    "value": "73/100"
+  },
+  {
+    "tconst": "tt0316654",
+    "source": "Internet Movie Database",
+    "value": "7.5/10"
+  },
+  {
+    "tconst": "tt0316654",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0316654",
+    "source": "Metacritic",
+    "value": "83/100"
+  },
+  {
+    "tconst": "tt0848228",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt0848228",
+    "source": "Rotten Tomatoes",
+    "value": "91%"
+  },
+  {
+    "tconst": "tt0848228",
+    "source": "Metacritic",
+    "value": "69/100"
+  },
+  {
+    "tconst": "tt4154756",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt4154756",
+    "source": "Rotten Tomatoes",
+    "value": "85%"
+  },
+  {
+    "tconst": "tt4154756",
+    "source": "Metacritic",
+    "value": "68/100"
+  },
+  {
+    "tconst": "tt4154796",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt4154796",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt4154796",
+    "source": "Metacritic",
+    "value": "78/100"
+  },
+  {
+    "tconst": "tt2015381",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt2015381",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt2015381",
+    "source": "Metacritic",
+    "value": "76/100"
+  },
+  {
+    "tconst": "tt7286456",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt7286456",
+    "source": "Rotten Tomatoes",
+    "value": "68%"
+  },
+  {
+    "tconst": "tt7286456",
+    "source": "Metacritic",
+    "value": "59/100"
+  },
+  {
+    "tconst": "tt0947798",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt0947798",
+    "source": "Rotten Tomatoes",
+    "value": "85%"
+  },
+  {
+    "tconst": "tt0947798",
+    "source": "Metacritic",
+    "value": "79/100"
+  },
+  {
+    "tconst": "tt0180093",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0180093",
+    "source": "Rotten Tomatoes",
+    "value": "78%"
+  },
+  {
+    "tconst": "tt0180093",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt1675434",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt1675434",
+    "source": "Rotten Tomatoes",
+    "value": "76%"
+  },
+  {
+    "tconst": "tt1675434",
+    "source": "Metacritic",
+    "value": "57/100"
+  },
+  {
+    "tconst": "tt0119698",
+    "source": "Internet Movie Database",
+    "value": "8.4/10"
+  },
+  {
+    "tconst": "tt0119698",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0119698",
+    "source": "Metacritic",
+    "value": "76/100"
+  },
+  {
+    "tconst": "tt0120586",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0120586",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt0120586",
+    "source": "Metacritic",
+    "value": "62/100"
+  },
+  {
+    "tconst": "tt0268978",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0268978",
+    "source": "Rotten Tomatoes",
+    "value": "74%"
+  },
+  {
+    "tconst": "tt0268978",
+    "source": "Metacritic",
+    "value": "72/100"
+  },
+  {
+    "tconst": "tt0119217",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0119217",
+    "source": "Rotten Tomatoes",
+    "value": "97%"
+  },
+  {
+    "tconst": "tt0119217",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt0120689",
+    "source": "Internet Movie Database",
+    "value": "8.6/10"
+  },
+  {
+    "tconst": "tt0120689",
+    "source": "Rotten Tomatoes",
+    "value": "78%"
+  },
+  {
+    "tconst": "tt0120689",
+    "source": "Metacritic",
+    "value": "61/100"
+  },
+  {
+    "tconst": "tt0088763",
+    "source": "Internet Movie Database",
+    "value": "8.5/10"
+  },
+  {
+    "tconst": "tt0088763",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0088763",
+    "source": "Metacritic",
+    "value": "87/100"
+  },
+  {
+    "tconst": "tt0107290",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0107290",
+    "source": "Rotten Tomatoes",
+    "value": "91%"
+  },
+  {
+    "tconst": "tt0107290",
+    "source": "Metacritic",
+    "value": "68/100"
+  },
+  {
+    "tconst": "tt0119654",
+    "source": "Internet Movie Database",
+    "value": "7.3/10"
+  },
+  {
+    "tconst": "tt0119654",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0119654",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt0116282",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0116282",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt0116282",
+    "source": "Metacritic",
+    "value": "86/100"
+  },
+  {
+    "tconst": "tt0118715",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0118715",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt0118715",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt0477348",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0477348",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt0477348",
+    "source": "Metacritic",
+    "value": "92/100"
+  },
+  {
+    "tconst": "tt1392214",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt1392214",
+    "source": "Rotten Tomatoes",
+    "value": "81%"
+  },
+  {
+    "tconst": "tt1392214",
+    "source": "Metacritic",
+    "value": "70/100"
+  },
+  {
+    "tconst": "tt2543164",
+    "source": "Internet Movie Database",
+    "value": "7.9/10"
+  },
+  {
+    "tconst": "tt2543164",
+    "source": "Rotten Tomatoes",
+    "value": "94%"
+  },
+  {
+    "tconst": "tt2543164",
+    "source": "Metacritic",
+    "value": "81/100"
+  },
+  {
+    "tconst": "tt1856101",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt1856101",
+    "source": "Rotten Tomatoes",
+    "value": "88%"
+  },
+  {
+    "tconst": "tt1856101",
+    "source": "Metacritic",
+    "value": "81/100"
+  },
+  {
+    "tconst": "tt1160419",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt1160419",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt1160419",
+    "source": "Metacritic",
+    "value": "74/100"
+  },
+  {
+    "tconst": "tt0169858",
+    "source": "Internet Movie Database",
+    "value": "7.7/10"
+  },
+  {
+    "tconst": "tt0169858",
+    "source": "Rotten Tomatoes",
+    "value": "82%"
+  },
+  {
+    "tconst": "tt0169858",
+    "source": "Metacritic",
+    "value": "74/100"
+  },
+  {
+    "tconst": "tt0212720",
+    "source": "Internet Movie Database",
+    "value": "7.2/10"
+  },
+  {
+    "tconst": "tt0212720",
+    "source": "Rotten Tomatoes",
+    "value": "75%"
+  },
+  {
+    "tconst": "tt0212720",
+    "source": "Metacritic",
+    "value": "65/100"
+  },
+  {
+    "tconst": "tt0167404",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0167404",
+    "source": "Rotten Tomatoes",
+    "value": "86%"
+  },
+  {
+    "tconst": "tt0167404",
+    "source": "Metacritic",
+    "value": "64/100"
+  },
+  {
+    "tconst": "tt0112573",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0112573",
+    "source": "Rotten Tomatoes",
+    "value": "76%"
+  },
+  {
+    "tconst": "tt0112573",
+    "source": "Metacritic",
+    "value": "68/100"
+  },
+  {
+    "tconst": "tt0246578",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt0246578",
+    "source": "Rotten Tomatoes",
+    "value": "87%"
+  },
+  {
+    "tconst": "tt0246578",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt0289879",
+    "source": "Internet Movie Database",
+    "value": "6.8/10"
+  },
+  {
+    "tconst": "tt0289879",
+    "source": "Rotten Tomatoes",
+    "value": "72%"
+  },
+  {
+    "tconst": "tt0289879",
+    "source": "Metacritic",
+    "value": "68/100"
+  },
+  {
+    "tconst": "tt3170832",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt3170832",
+    "source": "Rotten Tomatoes",
+    "value": "93%"
+  },
+  {
+    "tconst": "tt3170832",
+    "source": "Metacritic",
+    "value": "86/100"
+  },
+  {
+    "tconst": "tt1798709",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt1798709",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt1798709",
+    "source": "Metacritic",
+    "value": "91/100"
+  },
+  {
+    "tconst": "tt0910936",
+    "source": "Internet Movie Database",
+    "value": "6.9/10"
+  },
+  {
+    "tconst": "tt0910936",
+    "source": "Rotten Tomatoes",
+    "value": "68%"
+  },
+  {
+    "tconst": "tt0910936",
+    "source": "Metacritic",
+    "value": "64/100"
+  },
+  {
+    "tconst": "tt0378194",
+    "source": "Internet Movie Database",
+    "value": "8.0/10"
+  },
+  {
+    "tconst": "tt0378194",
+    "source": "Rotten Tomatoes",
+    "value": "84%"
+  },
+  {
+    "tconst": "tt0378194",
+    "source": "Metacritic",
+    "value": "83/100"
+  },
+  {
+    "tconst": "tt0266697",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0266697",
+    "source": "Rotten Tomatoes",
+    "value": "85%"
+  },
+  {
+    "tconst": "tt0266697",
+    "source": "Metacritic",
+    "value": "69/100"
+  },
+  {
+    "tconst": "tt0105236",
+    "source": "Internet Movie Database",
+    "value": "8.3/10"
+  },
+  {
+    "tconst": "tt0105236",
+    "source": "Rotten Tomatoes",
+    "value": "90%"
+  },
+  {
+    "tconst": "tt0105236",
+    "source": "Metacritic",
+    "value": "81/100"
+  },
+  {
+    "tconst": "tt0119488",
+    "source": "Internet Movie Database",
+    "value": "8.2/10"
+  },
+  {
+    "tconst": "tt0119488",
+    "source": "Rotten Tomatoes",
+    "value": "99%"
+  },
+  {
+    "tconst": "tt0119488",
+    "source": "Metacritic",
+    "value": "91/100"
+  },
+  {
+    "tconst": "tt0264464",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0264464",
+    "source": "Rotten Tomatoes",
+    "value": "96%"
+  },
+  {
+    "tconst": "tt0264464",
+    "source": "Metacritic",
+    "value": "75/100"
+  },
+  {
+    "tconst": "tt0257044",
+    "source": "Internet Movie Database",
+    "value": "7.9/10"
+  },
+  {
+    "tconst": "tt0257044",
+    "source": "Rotten Tomatoes",
+    "value": "84%"
+  },
+  {
+    "tconst": "tt0257044",
+    "source": "Metacritic",
+    "value": "68/100"
+  },
+  {
+    "tconst": "tt1631867",
+    "source": "Internet Movie Database",
+    "value": "7.9/10"
+  },
+  {
+    "tconst": "tt1631867",
+    "source": "Rotten Tomatoes",
+    "value": "91%"
+  },
+  {
+    "tconst": "tt1631867",
+    "source": "Metacritic",
+    "value": "71/100"
+  },
+  {
+    "tconst": "tt0325980",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0325980",
+    "source": "Rotten Tomatoes",
+    "value": "79%"
+  },
+  {
+    "tconst": "tt0325980",
+    "source": "Metacritic",
+    "value": "63/100"
+  },
+  {
+    "tconst": "tt0758758",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt0758758",
+    "source": "Rotten Tomatoes",
+    "value": "83%"
+  },
+  {
+    "tconst": "tt0758758",
+    "source": "Metacritic",
+    "value": "73/100"
+  },
+  {
+    "tconst": "tt0790636",
+    "source": "Internet Movie Database",
+    "value": "7.9/10"
+  },
+  {
+    "tconst": "tt0790636",
+    "source": "Rotten Tomatoes",
+    "value": "92%"
+  },
+  {
+    "tconst": "tt0790636",
+    "source": "Metacritic",
+    "value": "84/100"
+  },
+  {
+    "tconst": "tt2024544",
+    "source": "Internet Movie Database",
+    "value": "8.1/10"
+  },
+  {
+    "tconst": "tt2024544",
+    "source": "Rotten Tomatoes",
+    "value": "95%"
+  },
+  {
+    "tconst": "tt2024544",
+    "source": "Metacritic",
+    "value": "96/100"
+  },
+  {
+    "tconst": "tt5052448",
+    "source": "Internet Movie Database",
+    "value": "7.7/10"
+  },
+  {
+    "tconst": "tt5052448",
+    "source": "Rotten Tomatoes",
+    "value": "98%"
+  },
+  {
+    "tconst": "tt5052448",
+    "source": "Metacritic",
+    "value": "85/100"
+  }
+]

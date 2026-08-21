@@ -1,72 +1,81 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require("bcrypt");
-var jwt = require("jsonwebtoken");
-const authorization = require('../middleware/authorization');
+'use strict';
 
-router.get("/:id", authorization, async function (req, res, next) {
-  if (Object.keys(req.query).length > 0) {
-    res.status(400).json({
-      error: true,
-      message: `Query parameters are not permitted.`,
-    });
-    return;
-  }  
+const express = require('express');
 
-  const namesResult = await req.db.from('names as n').select({
-    name: 'n.primaryName',
-    birthYear: 'n.birthYear',
-    deathYear: 'n.deathYear',
-    titles: 'n.knownForTitles'
-  }).where('n.nconst', '=', req.params.id).first();
-  if (!namesResult) {
-    res.status(404).json({
-      error: true,
-      message: `No record exists of a person with this ID`,
-    });
-    return;
-  }
-  const personName = namesResult.name;
-  const personBirthYear = namesResult.birthYear || null;
-  const personDeathYear = namesResult.deathYear || null;
+const requireAuth = require('../middleware/authorization');
 
+const router = express.Router();
 
-  req.db.from('principals as p')
-  .join('basics as b', function() {
-    this.on('b.tconst', '=', 'p.tconst')
-  })
-  .select({
-    movieName: 'b.primaryTitle', 
-    movieId: 'b.tconst',
-    imdbRating: 'b.imdbRating'
-  }, {
-    characters: 'p.characters',
-    category: 'p.category'
-  }
-  ).where('p.nconst', '=', req.params.id)
-  .then((rows) => {
-    const data = [];
-    rows.map((row) => {
-      var characterArray = row.characters.trim() === "" ? "" : JSON.parse(row.characters);
-      data.push({
-        "movieName": row.movieName, 
-        "movieId": row.movieId,
-        "category": row.category,
-        "characters": characterArray,
-        "imdbRating": parseFloat(row.imdbRating) || null,
+router.get('/:id', requireAuth, async (req, res, next) => {
+  try {
+    if (Object.keys(req.query).length > 0) {
+      return res.status(400).json({
+        error: true,
+        message: 'Query parameters are not permitted.',
+      });
+    }
+
+    const person = await req
+      .db('names as n')
+      .select({
+        name: 'n.primaryName',
+        birthYear: 'n.birthYear',
+        deathYear: 'n.deathYear',
       })
-    })
-    console.log(rows.length, data.length)
-    res.status(200).send( {
-      "name": personName,
-      "birthYear": personBirthYear,
-      "deathYear": personDeathYear,
-      "roles": data    } )
-  })
-  .catch((err) => {
-    console.log(err);
-    res.status(500).json({ "error": true, "message": "Database error"})
-  })
+      .where('n.nconst', req.params.id)
+      .first();
+
+    if (!person) {
+      return res.status(404).json({
+        error: true,
+        message: 'No record exists of a person with this ID',
+      });
+    }
+
+    const roles = await req
+      .db('principals as p')
+      .join('basics as b', 'b.tconst', 'p.tconst')
+      .select({
+        movieName: 'b.primaryTitle',
+        movieId: 'b.tconst',
+        imdbRating: 'b.imdbRating',
+        year: 'b.year',
+        characters: 'p.characters',
+        category: 'p.category',
+      })
+      .where('p.nconst', req.params.id)
+      .orderBy('b.year', 'desc');
+
+    return res.status(200).json({
+      name: person.name,
+      birthYear: person.birthYear ?? null,
+      deathYear: person.deathYear ?? null,
+      roles: roles.map((row) => ({
+        movieName: row.movieName,
+        movieId: row.movieId,
+        year: row.year ?? null,
+        category: row.category,
+        characters: parseCharacters(row.characters),
+        imdbRating: Number.parseFloat(row.imdbRating) || null,
+      })),
+    });
+  } catch (err) {
+    return next(err);
+  }
 });
+
+function parseCharacters(value) {
+  if (!value || !value.trim()) {
+    return [];
+  }
+
+  try {
+    const parsed = JSON.parse(value);
+
+    return Array.isArray(parsed) ? parsed : [String(parsed)];
+  } catch {
+    return [value];
+  }
+}
 
 module.exports = router;

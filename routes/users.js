@@ -1,283 +1,200 @@
-var express = require('express');
-var router = express.Router();
-const jwt = require('jsonwebtoken');
+'use strict';
+
+const express = require('express');
 const bcrypt = require('bcrypt');
-const { v4: uuid } = require('uuid');
 
-router.post('/login', function (req, res, next) {
-  // 1. Retrieve email and password from req.body
-  var email = req.body.email;
-  var password = req.body.password;
-  var longExpiry = req.body.longExpiry || false;
-  var bearerExpiresInSeconds = req.body.bearerExpiresInSeconds || 600;
-  var refreshExpiresInSeconds = req.body.refreshExpiresInSeconds || 86400;
+const config = require('../config');
+const tokens = require('../services/tokens');
+const { validateEmail, validatePassword } = require('../services/validation');
+const { authLimiter, registerLimiter } = require('../middleware/rateLimit');
 
-  // Verify body
-  if (!email || !password) {
-    res.status(400).json({
-      error: true,
-      message: "Request body incomplete - email and password needed"
-    });
-    return;
-  }
+const router = express.Router();
 
-  // 2. Determine if user already exists in table
-  const queryUsers = req.db.from("users").select("*").where("email", "=", email);
-  queryUsers
-    .then(users => {
-      if (users.length === 0) {
-        // 2.2 If user does not exist, return error response
-        res.status(401).json({
-          error: true,
-          message: "There's no account associated with this email address or username."
-        });
-        return null;
-      }
+/**
+ * One message for "no such account" and "wrong password" alike.
+ *
+ * The old version said "There's no account associated with this email address"
+ * for an unknown email, which turned the login form into an oracle for checking
+ * whether any given address had registered.
+ */
+const BAD_CREDENTIALS = 'Incorrect email or password';
 
-      // 2.1 If user does exist, verify if passwords match
-      return bcrypt.compare(password, users[0].password);
-    })
-    .then(async match => {
-      if (match === null) {
-        return;
-      }
-      if (!match) {
-        // 2.1.2 If passwords do not match, return error response
-        res.status(401).json({
-          error: true,
-          message: "Incorrect email or password"
-        });
-        return;
-      }
-      
-      // 2.1.1 If passwords match, return JWT
-      const bearerToken = await generateToken(req, "Bearer", email, bearerExpiresInSeconds);
-      const refreshToken = await generateToken(req, "Refresh", email, refreshExpiresInSeconds);
-      res.status(200).json({
-        "bearerToken": bearerToken,
-        "refreshToken": refreshToken
-      });
-    })
-    .catch(err => {
-      // Log error to the console and send response
-      console.log(err);
-      res.status(500).json({error: true, message: err});
-    });
-});
+const normaliseEmail = (email) => String(email).trim().toLowerCase();
 
+router.post('/register', registerLimiter, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
 
-router.post('/register', async function (req, res, next) {
-  // Retrieve email and password from req.body
-  const email = req.body.email;
-  const password = req.body.password;
-  
-  // Verify body
-  if (!email || !password) {
-    res.status(400).json({
-      error: true,
-      message: "Request body incomplete - email and password needed"
-    });
-    return;
-  }
-  await createUsersTableIfNotExists(req, res);
-
-  // Determine if user already exists in table
-  const users = await req.db.from("users").select("*").where("email", "=", email)
-  if (users.length > 0) {
-    res.status(409).json({
-      "error": true,
-      "message": "User already exists"
-    });
-    return;
-  }
-
-  // Insert user into DB
-  const firstName = req.body.firstName || null;
-  const lastName = req.body.lastName || null;
-  const dob = req.body.dob || null;
-  const address = req.body.address || null;
-  const saltRounds = 10;
-  const hash = bcrypt.hashSync(password, saltRounds);
-  req.db.from("users").insert({ 
-    email: email, password: hash, firstName: firstName, lastName: lastName, dob: dob, address: address}).then(() => {
-      res.status(201).json({ message: "User created" });
-    }).catch(e =>{
-      console.log(e)
-      res.status(500).json({ "error": true, message: e });
-    })
-});
-
-router.post('/logout', async function (req, res) {
-
-  // Retrieve refreshToken from req.body
-  const refreshToken = req.body.refreshToken;
-
-  // Verify refreshToken
-  if (!refreshToken) {
-    res.status(400).json({
-      error: true,
-      message: "Request body incomplete, refresh token required"
-    });
-    return;
-  }
-  try{
-    jwt.verify(refreshToken, process.env.JWT_SECRET);
-  }catch (e){
-    if (e.name === "TokenExpiredError") {
-      res.status(401).json({ error: true, message: "JWT token has expired" });
-      
-    }else{
-      res.status(401).json({
+    if (!email || !password) {
+      return res.status(400).json({
         error: true,
-        message: "Invalid JWT token"
+        message: 'Request body incomplete - email and password needed',
       });
     }
-    return;
-  }
 
-  // Invalidate refreshToken
-  await createTokensTableIfNotExists(req);
-  const token = await req.db.from('tokens').select("*").where('token', '=', req.body.refreshToken).first();
-  
-  
-  
-  if (!token){
-    res.status(401).json({
-      error: true,
-      message: "Invalid JWT token"
-    });
-    return;
-  }else{
-    await req.db.from('tokens').where({ token: req.body.refreshToken }).del().then(() => {
-      res.status(200).json({"error": false, "message": "Token successfully invalidated"});
-      return;
-    }).catch(err => {
-      console.log(err);
-      res.status(500).json({"error":true, "message": err});
-    })
+    const emailError = validateEmail(email);
+    if (emailError) {
+      return res.status(400).json({ error: true, message: emailError });
+    }
+
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      return res.status(400).json({ error: true, message: passwordError });
+    }
+
+    const normalised = normaliseEmail(email);
+    const hash = await bcrypt.hash(password, config.bcryptRounds);
+
+    try {
+      await req.db('users').insert({ email: normalised, password: hash });
+    } catch (err) {
+      // users.email carries a unique index, so this is the authoritative
+      // duplicate check — a select-then-insert would race.
+      if (isUniqueViolation(err)) {
+        return res.status(409).json({ error: true, message: 'User already exists' });
+      }
+
+      throw err;
+    }
+
+    return res.status(201).json({ error: false, message: 'User created' });
+  } catch (err) {
+    return next(err);
   }
-  
-    
-  
 });
 
-router.post('/refresh', async function (req, res) {
-  // Retrieve refreshToken from req.body
-  const refreshToken = req.body.refreshToken;
+router.post('/login', authLimiter, async (req, res, next) => {
+  try {
+    const { email, password, longExpiry } = req.body;
 
-  // Verify body
-  if (!refreshToken) {
-    res.status(400).json({
-      error: true,
-      message: "Request body incomplete, refresh token required"
+    if (!email || !password) {
+      return res.status(400).json({
+        error: true,
+        message: 'Request body incomplete - email and password needed',
+      });
+    }
+
+    const user = await req.db('users').where({ email: normaliseEmail(email) }).first();
+
+    // Hash against a dummy value when the account does not exist, so the
+    // response time does not reveal which addresses are registered.
+    const matches = user
+      ? await bcrypt.compare(password, user.password)
+      : await bcrypt.compare(password, DUMMY_HASH).then(() => false);
+
+    if (!matches) {
+      return res.status(401).json({ error: true, message: BAD_CREDENTIALS });
+    }
+
+    // Token lifetimes are chosen here, not by the caller. They used to come
+    // straight from req.body, which let anyone mint a token valid for decades.
+    const bearerToken = tokens.bearerFor(user.email);
+    const refreshToken = await tokens.issueRefreshToken(req.db, user.email, {
+      longExpiry: longExpiry === true,
     });
-    return;
+
+    // Opportunistic housekeeping; a failure here must not fail the login.
+    tokens.purgeExpired(req.db).catch((err) => console.error('Token purge failed:', err));
+
+    return res.status(200).json({ bearerToken, refreshToken });
+  } catch (err) {
+    return next(err);
   }
-
-  // Verify refreshToken
-  await createTokensTableIfNotExists(req);
-
-  const queryTokens = req.db.from("tokens").select("*").where("token", "=", refreshToken).first();
-  queryTokens
-    .then(async result => {
-      // If token not in the server return error
-      if(!result){
-        res.status(401).json({
-          "error": true,
-          "message": "Invalid JWT token"
-        });
-        return;
-      }
-      else{
-        // If token exists, check the expiration
-        try {
-          jwt.verify(result.token, process.env.JWT_SECRET);
-        } catch (e) {
-            if (e.name === "TokenExpiredError") {
-                res.status(401).json({ error: true, message: "JWT token has expired" });
-                
-            } else {
-                res.status(401).json({ error: true, message: "Invalid JWT token" });
-            }
-            await req.db.from('tokens').where({ token: result.token }).del();
-            return;
-        }
-        // Generate new bearerToken
-        var newBearerToken = await generateToken(req, "Bearer", result.email, 600);
-
-        res.status(200).json({
-          "bearerToken": newBearerToken,
-          "refreshToken": {
-            "token": result.token,
-            "token_type": "Refresh",
-            "expires_in": 86400
-          }
-        });
-        return;
-      }
-  }).catch(err => {
-    console.log(err);
-    res.status(500).json({"error": true, "message": err});
-  })
-
-  
-
-  
 });
 
+router.post('/refresh', authLimiter, async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
 
-async function generateToken(req, tokenType, email, expires_in){
-  var expiresIn = parseInt(expires_in) || 600;
-  var exp = Math.floor(Date.now() / 1000) + expiresIn;
-  var token = jwt.sign({ email, exp }, process.env.JWT_SECRET);
-  if (tokenType === 'Refresh'){
-    await createTokensTableIfNotExists(req);
-    await req.db.from("tokens").insert({ 
-      token: token, email: email, exp: exp})
-      .catch(e =>{
-        console.log(e)
-        res.status(500).json({ "error": true, message: e });
-    })
-  }
-  return {
-    "token": token,
-    "token_type": tokenType,
-    "expires_in": expiresIn
-  }
-}
+    if (!refreshToken) {
+      return res.status(400).json({
+        error: true,
+        message: 'Request body incomplete, refresh token required',
+      });
+    }
 
+    const result = await tokens.consumeRefreshToken(req.db, refreshToken);
 
-async function createUsersTableIfNotExists(req) {
-  const exists = await req.db.schema.hasTable('users');
-  if (!exists) {
-    await req.db.schema.createTable('users', function(table) {
-      table.uuid('id').primary().defaultTo(req.db.raw('(UUID())'));
-      table.string("firstName");
-      table.string("lastName");
-      table.string("dob");
-      table.string("address");
-      table.string("email");
-      table.string('password');
-      table.timestamp('created_at').defaultTo(req.db.fn.now());
-      table.timestamp('updated_at').defaultTo(req.db.fn.now());
+    if (result.status === 'expired') {
+      return res.status(401).json({ error: true, message: 'JWT token has expired' });
+    }
+
+    if (result.status === 'reused') {
+      // A correctly signed token with no row behind it means it was already
+      // rotated out. Treat it as a possible theft and cut the session off.
+      let payload;
+      try {
+        payload = tokens.verify(refreshToken);
+      } catch {
+        payload = null;
+      }
+
+      if (payload?.email) {
+        await tokens.revokeAllForUser(req.db, payload.email);
+      }
+
+      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+    }
+
+    if (result.status !== 'ok') {
+      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+    }
+
+    // Rotate: the token just spent is gone, and a fresh one takes its place in
+    // the same family. The old code handed the very same refresh token back.
+    const { row, email } = result;
+    const newRefresh = await tokens.issueRefreshToken(req.db, email, { family: row.family });
+
+    return res.status(200).json({
+      bearerToken: tokens.bearerFor(email),
+      refreshToken: newRefresh,
     });
+  } catch (err) {
+    return next(err);
   }
+});
 
-}
+router.post('/logout', async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
 
-async function createTokensTableIfNotExists(req) {
-  const exists = await req.db.schema.hasTable('tokens');
-  if (!exists) {
-    await req.db.schema.createTable('tokens', function(table) {
-      table.increments('id').primary();
-      table.string("token");
-      table.string("email");
-      table.string("exp");
-      table.timestamp('created_at').defaultTo(req.db.fn.now());
-    });
+    if (!refreshToken) {
+      return res.status(400).json({
+        error: true,
+        message: 'Request body incomplete, refresh token required',
+      });
+    }
+
+    const result = await tokens.consumeRefreshToken(req.db, refreshToken);
+
+    if (result.status === 'invalid') {
+      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+    }
+
+    if (result.status === 'expired') {
+      return res.status(401).json({ error: true, message: 'JWT token has expired' });
+    }
+
+    // Log out everywhere this session reached, not just this one token.
+    if (result.status === 'ok') {
+      await tokens.revokeFamily(req.db, result.row.family);
+    }
+
+    return res.status(200).json({ error: false, message: 'Token successfully invalidated' });
+  } catch (err) {
+    return next(err);
   }
+});
 
+/** bcrypt hash of a value no user can have; used to equalise login timing. */
+const DUMMY_HASH = '$2b$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy';
+
+function isUniqueViolation(err) {
+  return (
+    err.code === 'ER_DUP_ENTRY' || // MySQL
+    err.code === 'SQLITE_CONSTRAINT_UNIQUE' ||
+    /UNIQUE constraint failed/i.test(err.message || '')
+  );
 }
-
 
 module.exports = router;

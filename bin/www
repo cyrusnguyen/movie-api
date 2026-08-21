@@ -1,70 +1,76 @@
 #!/usr/bin/env node
+'use strict';
 
 /**
- * Module dependencies.
+ * HTTP server entry point.
  */
 
-var app = require('../app');
-var debug = require('debug')('assignment3-server-side:server');
+const http = require('http');
 
-/**
- * Get port from environment and store in Express.
- */
+const app = require('../app');
+const knexConfig = require('../knexfile');
 
-var port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-const server = app;
+// The previous version attached these listeners to the Express app rather than
+// the http.Server, so neither ever fired and startup failures were silent.
+const server = http.createServer(app);
+
+start();
+
+async function start() {
+  try {
+    await prepareDatabase();
+  } catch (err) {
+    console.error('Database preparation failed:', err.message);
+    process.exit(1);
+  }
+
+  server.listen(port);
+  server.on('error', onError);
+  server.on('listening', onListening);
+}
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Bring the schema up to date, and load the bundled catalogue the first time
+ * the app runs so a fresh clone needs no extra setup step.
  */
+async function prepareDatabase() {
+  const knex = app.knex;
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+  await knex.migrate.latest();
 
-/**
- * Normalize a port into a number, string, or false.
- */
+  const [{ count }] = await knex('basics').count({ count: '*' });
+
+  if (Number(count) === 0) {
+    console.log('Empty catalogue detected — loading bundled sample data…');
+    const { seed } = require('../scripts/seed');
+    await seed({ quiet: true });
+  }
+}
 
 function normalizePort(val) {
-  var port = parseInt(val, 10);
+  const parsed = parseInt(val, 10);
 
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
+  if (Number.isNaN(parsed)) return val; // named pipe
+  if (parsed >= 0) return parsed;
 
   return false;
 }
 
-/**
- * Event listener for HTTP server "error" event.
- */
-
 function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
+  if (error.syscall !== 'listen') throw error;
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
-  // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(`${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(bind + ' is already in use');
+      console.error(`${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -72,14 +78,21 @@ function onError(error) {
   }
 }
 
-/**
- * Event listener for HTTP server "listening" event.
- */
-
 function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  const engine = knexConfig.isSqlite ? 'SQLite (bundled)' : 'MySQL';
+
+  console.log(`Movie API listening on ${bind}  •  database: ${engine}`);
+  console.log(`API reference: http://localhost:${addr.port}/`);
 }
+
+const shutdown = async (signal) => {
+  console.log(`\n${signal} received, shutting down…`);
+  server.close();
+  await app.knex.destroy();
+  process.exit(0);
+};
+
+process.on('SIGINT', () => shutdown('SIGINT'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));

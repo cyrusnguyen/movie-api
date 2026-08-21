@@ -1,0 +1,2291 @@
+[
+  {
+    "nconst": "nm9000001",
+    "primaryName": "Frank Darabont",
+    "birthYear": 1959,
+    "deathYear": null,
+    "knownForTitles": "tt0111161,tt0120689"
+  },
+  {
+    "nconst": "nm9000002",
+    "primaryName": "Tim Robbins",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0111161"
+  },
+  {
+    "nconst": "nm9000003",
+    "primaryName": "Morgan Freeman",
+    "birthYear": 1937,
+    "deathYear": null,
+    "knownForTitles": "tt0111161,tt0114369"
+  },
+  {
+    "nconst": "nm9000004",
+    "primaryName": "Bob Gunton",
+    "birthYear": 1945,
+    "deathYear": null,
+    "knownForTitles": "tt0111161"
+  },
+  {
+    "nconst": "nm9000005",
+    "primaryName": "William Sadler",
+    "birthYear": 1950,
+    "deathYear": null,
+    "knownForTitles": "tt0111161"
+  },
+  {
+    "nconst": "nm9000006",
+    "primaryName": "Quentin Tarantino",
+    "birthYear": 1963,
+    "deathYear": null,
+    "knownForTitles": "tt0110912,tt0361748,tt1853728,tt0378194"
+  },
+  {
+    "nconst": "nm9000007",
+    "primaryName": "John Travolta",
+    "birthYear": 1954,
+    "deathYear": null,
+    "knownForTitles": "tt0110912"
+  },
+  {
+    "nconst": "nm9000008",
+    "primaryName": "Samuel L. Jackson",
+    "birthYear": 1948,
+    "deathYear": null,
+    "knownForTitles": "tt0110912,tt1853728,tt0317705"
+  },
+  {
+    "nconst": "nm9000009",
+    "primaryName": "Uma Thurman",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt0110912,tt0378194,tt0266697"
+  },
+  {
+    "nconst": "nm9000010",
+    "primaryName": "Bruce Willis",
+    "birthYear": 1955,
+    "deathYear": null,
+    "knownForTitles": "tt0110912,tt0167404"
+  },
+  {
+    "nconst": "nm9000011",
+    "primaryName": "Steven Spielberg",
+    "birthYear": 1946,
+    "deathYear": null,
+    "knownForTitles": "tt0108052,tt0120815,tt0107290,tt0212720"
+  },
+  {
+    "nconst": "nm9000012",
+    "primaryName": "Liam Neeson",
+    "birthYear": 1952,
+    "deathYear": null,
+    "knownForTitles": "tt0108052,tt0372784"
+  },
+  {
+    "nconst": "nm9000013",
+    "primaryName": "Ben Kingsley",
+    "birthYear": 1943,
+    "deathYear": null,
+    "knownForTitles": "tt0108052,tt1130884"
+  },
+  {
+    "nconst": "nm9000014",
+    "primaryName": "Ralph Fiennes",
+    "birthYear": 1962,
+    "deathYear": null,
+    "knownForTitles": "tt0108052,tt2278388"
+  },
+  {
+    "nconst": "nm9000015",
+    "primaryName": "Robert Zemeckis",
+    "birthYear": 1951,
+    "deathYear": null,
+    "knownForTitles": "tt0109830,tt0088763"
+  },
+  {
+    "nconst": "nm9000016",
+    "primaryName": "Tom Hanks",
+    "birthYear": 1956,
+    "deathYear": null,
+    "knownForTitles": "tt0109830,tt0120815,tt0114709,tt0435761"
+  },
+  {
+    "nconst": "nm9000017",
+    "primaryName": "Robin Wright",
+    "birthYear": 1966,
+    "deathYear": null,
+    "knownForTitles": "tt0109830"
+  },
+  {
+    "nconst": "nm9000018",
+    "primaryName": "Gary Sinise",
+    "birthYear": 1955,
+    "deathYear": null,
+    "knownForTitles": "tt0109830"
+  },
+  {
+    "nconst": "nm9000019",
+    "primaryName": "Sally Field",
+    "birthYear": 1946,
+    "deathYear": null,
+    "knownForTitles": "tt0109830"
+  },
+  {
+    "nconst": "nm9000020",
+    "primaryName": "Jonathan Demme",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0102926"
+  },
+  {
+    "nconst": "nm9000021",
+    "primaryName": "Jodie Foster",
+    "birthYear": 1962,
+    "deathYear": null,
+    "knownForTitles": "tt0102926"
+  },
+  {
+    "nconst": "nm9000022",
+    "primaryName": "Anthony Hopkins",
+    "birthYear": 1937,
+    "deathYear": null,
+    "knownForTitles": "tt0102926"
+  },
+  {
+    "nconst": "nm9000023",
+    "primaryName": "Scott Glenn",
+    "birthYear": 1941,
+    "deathYear": null,
+    "knownForTitles": "tt0102926"
+  },
+  {
+    "nconst": "nm9000024",
+    "primaryName": "David Fincher",
+    "birthYear": 1962,
+    "deathYear": null,
+    "knownForTitles": "tt0114369,tt0137523,tt2267998"
+  },
+  {
+    "nconst": "nm9000025",
+    "primaryName": "Brad Pitt",
+    "birthYear": 1963,
+    "deathYear": null,
+    "knownForTitles": "tt0114369,tt0137523,tt0361748,tt0169858"
+  },
+  {
+    "nconst": "nm9000026",
+    "primaryName": "Gwyneth Paltrow",
+    "birthYear": 1972,
+    "deathYear": null,
+    "knownForTitles": "tt0114369,tt0265666"
+  },
+  {
+    "nconst": "nm9000027",
+    "primaryName": "Kevin Spacey",
+    "birthYear": 1959,
+    "deathYear": null,
+    "knownForTitles": "tt0114369,tt0114814,tt0169547,tt0119488"
+  },
+  {
+    "nconst": "nm9000028",
+    "primaryName": "Edward Norton",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0137523,tt0120586"
+  },
+  {
+    "nconst": "nm9000029",
+    "primaryName": "Helena Bonham Carter",
+    "birthYear": 1966,
+    "deathYear": null,
+    "knownForTitles": "tt0137523"
+  },
+  {
+    "nconst": "nm9000030",
+    "primaryName": "Lana Wachowski",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0133093"
+  },
+  {
+    "nconst": "nm9000031",
+    "primaryName": "Keanu Reeves",
+    "birthYear": 1964,
+    "deathYear": null,
+    "knownForTitles": "tt0133093"
+  },
+  {
+    "nconst": "nm9000032",
+    "primaryName": "Laurence Fishburne",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt0133093"
+  },
+  {
+    "nconst": "nm9000033",
+    "primaryName": "Carrie-Anne Moss",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0133093,tt0209144"
+  },
+  {
+    "nconst": "nm9000034",
+    "primaryName": "Hugo Weaving",
+    "birthYear": 1960,
+    "deathYear": null,
+    "knownForTitles": "tt0133093"
+  },
+  {
+    "nconst": "nm9000035",
+    "primaryName": "Tom Sizemore",
+    "birthYear": 1961,
+    "deathYear": 2023,
+    "knownForTitles": "tt0120815"
+  },
+  {
+    "nconst": "nm9000036",
+    "primaryName": "Matt Damon",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt0120815,tt0407887,tt0119217,tt0169858"
+  },
+  {
+    "nconst": "nm9000037",
+    "primaryName": "Peter Jackson",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt0120737,tt0167261,tt0167260"
+  },
+  {
+    "nconst": "nm9000038",
+    "primaryName": "Elijah Wood",
+    "birthYear": 1981,
+    "deathYear": null,
+    "knownForTitles": "tt0120737,tt0167261,tt0167260"
+  },
+  {
+    "nconst": "nm9000039",
+    "primaryName": "Ian McKellen",
+    "birthYear": 1939,
+    "deathYear": null,
+    "knownForTitles": "tt0120737,tt0167261,tt0167260"
+  },
+  {
+    "nconst": "nm9000040",
+    "primaryName": "Viggo Mortensen",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0120737,tt0167261,tt0167260"
+  },
+  {
+    "nconst": "nm9000041",
+    "primaryName": "Sean Astin",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt0120737,tt0167260"
+  },
+  {
+    "nconst": "nm9000042",
+    "primaryName": "Andy Serkis",
+    "birthYear": 1964,
+    "deathYear": null,
+    "knownForTitles": "tt0167261"
+  },
+  {
+    "nconst": "nm9000043",
+    "primaryName": "Christopher Nolan",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt0468569,tt0372784,tt1375666,tt0816692"
+  },
+  {
+    "nconst": "nm9000044",
+    "primaryName": "Christian Bale",
+    "birthYear": 1974,
+    "deathYear": null,
+    "knownForTitles": "tt0468569,tt0372784,tt0482571"
+  },
+  {
+    "nconst": "nm9000045",
+    "primaryName": "Heath Ledger",
+    "birthYear": 1979,
+    "deathYear": 2008,
+    "knownForTitles": "tt0468569"
+  },
+  {
+    "nconst": "nm9000046",
+    "primaryName": "Aaron Eckhart",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt0468569"
+  },
+  {
+    "nconst": "nm9000047",
+    "primaryName": "Gary Oldman",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0468569"
+  },
+  {
+    "nconst": "nm9000048",
+    "primaryName": "Michael Caine",
+    "birthYear": 1933,
+    "deathYear": null,
+    "knownForTitles": "tt0372784,tt0816692,tt0482571"
+  },
+  {
+    "nconst": "nm9000049",
+    "primaryName": "Cillian Murphy",
+    "birthYear": 1976,
+    "deathYear": null,
+    "knownForTitles": "tt0372784"
+  },
+  {
+    "nconst": "nm9000050",
+    "primaryName": "Leonardo DiCaprio",
+    "birthYear": 1974,
+    "deathYear": null,
+    "knownForTitles": "tt1375666,tt0407887,tt0993846,tt1130884"
+  },
+  {
+    "nconst": "nm9000051",
+    "primaryName": "Joseph Gordon-Levitt",
+    "birthYear": 1981,
+    "deathYear": null,
+    "knownForTitles": "tt1375666"
+  },
+  {
+    "nconst": "nm9000052",
+    "primaryName": "Elliot Page",
+    "birthYear": 1987,
+    "deathYear": null,
+    "knownForTitles": "tt1375666"
+  },
+  {
+    "nconst": "nm9000053",
+    "primaryName": "Tom Hardy",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt1375666,tt1291584,tt1392190,tt1663202"
+  },
+  {
+    "nconst": "nm9000054",
+    "primaryName": "Matthew McConaughey",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0816692,tt0993846,tt0790636"
+  },
+  {
+    "nconst": "nm9000055",
+    "primaryName": "Anne Hathaway",
+    "birthYear": 1982,
+    "deathYear": null,
+    "knownForTitles": "tt0816692"
+  },
+  {
+    "nconst": "nm9000056",
+    "primaryName": "Jessica Chastain",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt0816692"
+  },
+  {
+    "nconst": "nm9000057",
+    "primaryName": "Guy Pearce",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0209144,tt0119488"
+  },
+  {
+    "nconst": "nm9000058",
+    "primaryName": "Joe Pantoliano",
+    "birthYear": 1951,
+    "deathYear": null,
+    "knownForTitles": "tt0209144"
+  },
+  {
+    "nconst": "nm9000059",
+    "primaryName": "Hugh Jackman",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt0482571,tt1392214"
+  },
+  {
+    "nconst": "nm9000060",
+    "primaryName": "Scarlett Johansson",
+    "birthYear": 1984,
+    "deathYear": null,
+    "knownForTitles": "tt0482571,tt0848228,tt4154756,tt1798709"
+  },
+  {
+    "nconst": "nm9000061",
+    "primaryName": "Ridley Scott",
+    "birthYear": 1937,
+    "deathYear": null,
+    "knownForTitles": "tt0172495"
+  },
+  {
+    "nconst": "nm9000062",
+    "primaryName": "Russell Crowe",
+    "birthYear": 1964,
+    "deathYear": null,
+    "knownForTitles": "tt0172495,tt0268978,tt0119488"
+  },
+  {
+    "nconst": "nm9000063",
+    "primaryName": "Joaquin Phoenix",
+    "birthYear": 1974,
+    "deathYear": null,
+    "knownForTitles": "tt0172495,tt7286456,tt1798709"
+  },
+  {
+    "nconst": "nm9000064",
+    "primaryName": "Connie Nielsen",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt0172495"
+  },
+  {
+    "nconst": "nm9000065",
+    "primaryName": "Oliver Reed",
+    "birthYear": null,
+    "deathYear": 1999,
+    "knownForTitles": "tt0172495"
+  },
+  {
+    "nconst": "nm9000066",
+    "primaryName": "Michel Gondry",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0338013"
+  },
+  {
+    "nconst": "nm9000067",
+    "primaryName": "Jim Carrey",
+    "birthYear": 1962,
+    "deathYear": null,
+    "knownForTitles": "tt0338013"
+  },
+  {
+    "nconst": "nm9000068",
+    "primaryName": "Kate Winslet",
+    "birthYear": 1975,
+    "deathYear": null,
+    "knownForTitles": "tt0338013"
+  },
+  {
+    "nconst": "nm9000069",
+    "primaryName": "Kirsten Dunst",
+    "birthYear": 1982,
+    "deathYear": null,
+    "knownForTitles": "tt0338013,tt0286716,tt0316654"
+  },
+  {
+    "nconst": "nm9000070",
+    "primaryName": "Mark Ruffalo",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0338013,tt1130884,tt0848228,tt4154796"
+  },
+  {
+    "nconst": "nm9000071",
+    "primaryName": "Martin Scorsese",
+    "birthYear": 1942,
+    "deathYear": null,
+    "knownForTitles": "tt0407887,tt0993846,tt1130884"
+  },
+  {
+    "nconst": "nm9000072",
+    "primaryName": "Jack Nicholson",
+    "birthYear": 1937,
+    "deathYear": null,
+    "knownForTitles": "tt0407887"
+  },
+  {
+    "nconst": "nm9000073",
+    "primaryName": "Mark Wahlberg",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt0407887"
+  },
+  {
+    "nconst": "nm9000074",
+    "primaryName": "Jonah Hill",
+    "birthYear": 1983,
+    "deathYear": null,
+    "knownForTitles": "tt0993846"
+  },
+  {
+    "nconst": "nm9000075",
+    "primaryName": "Margot Robbie",
+    "birthYear": 1990,
+    "deathYear": null,
+    "knownForTitles": "tt0993846"
+  },
+  {
+    "nconst": "nm9000076",
+    "primaryName": "Christoph Waltz",
+    "birthYear": 1956,
+    "deathYear": null,
+    "knownForTitles": "tt0361748,tt1853728"
+  },
+  {
+    "nconst": "nm9000077",
+    "primaryName": "Melanie Laurent",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0361748"
+  },
+  {
+    "nconst": "nm9000078",
+    "primaryName": "Diane Kruger",
+    "birthYear": 1976,
+    "deathYear": null,
+    "knownForTitles": "tt0361748"
+  },
+  {
+    "nconst": "nm9000079",
+    "primaryName": "Jamie Foxx",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt1853728"
+  },
+  {
+    "nconst": "nm9000080",
+    "primaryName": "Damien Chazelle",
+    "birthYear": 1985,
+    "deathYear": null,
+    "knownForTitles": "tt2582802,tt3783958"
+  },
+  {
+    "nconst": "nm9000081",
+    "primaryName": "Miles Teller",
+    "birthYear": 1987,
+    "deathYear": null,
+    "knownForTitles": "tt2582802"
+  },
+  {
+    "nconst": "nm9000082",
+    "primaryName": "J.K. Simmons",
+    "birthYear": 1955,
+    "deathYear": null,
+    "knownForTitles": "tt2582802"
+  },
+  {
+    "nconst": "nm9000083",
+    "primaryName": "Paul Reiser",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2582802"
+  },
+  {
+    "nconst": "nm9000084",
+    "primaryName": "Ryan Gosling",
+    "birthYear": 1980,
+    "deathYear": null,
+    "knownForTitles": "tt3783958,tt1856101"
+  },
+  {
+    "nconst": "nm9000085",
+    "primaryName": "Emma Stone",
+    "birthYear": 1988,
+    "deathYear": null,
+    "knownForTitles": "tt3783958"
+  },
+  {
+    "nconst": "nm9000086",
+    "primaryName": "John Legend",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt3783958"
+  },
+  {
+    "nconst": "nm9000087",
+    "primaryName": "Rosemarie DeWitt",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt3783958"
+  },
+  {
+    "nconst": "nm9000088",
+    "primaryName": "Bong Joon Ho",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt6751668"
+  },
+  {
+    "nconst": "nm9000089",
+    "primaryName": "Song Kang-ho",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt6751668"
+  },
+  {
+    "nconst": "nm9000090",
+    "primaryName": "Lee Sun-kyun",
+    "birthYear": null,
+    "deathYear": 2023,
+    "knownForTitles": "tt6751668"
+  },
+  {
+    "nconst": "nm9000091",
+    "primaryName": "Cho Yeo-jeong",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt6751668"
+  },
+  {
+    "nconst": "nm9000092",
+    "primaryName": "Choi Woo-shik",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt6751668"
+  },
+  {
+    "nconst": "nm9000093",
+    "primaryName": "Gavin O’Connor",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1291584"
+  },
+  {
+    "nconst": "nm9000094",
+    "primaryName": "Joel Edgerton",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1291584"
+  },
+  {
+    "nconst": "nm9000095",
+    "primaryName": "Nick Nolte",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1291584"
+  },
+  {
+    "nconst": "nm9000096",
+    "primaryName": "George Miller",
+    "birthYear": 1945,
+    "deathYear": null,
+    "knownForTitles": "tt1392190"
+  },
+  {
+    "nconst": "nm9000097",
+    "primaryName": "Charlize Theron",
+    "birthYear": 1975,
+    "deathYear": null,
+    "knownForTitles": "tt1392190"
+  },
+  {
+    "nconst": "nm9000098",
+    "primaryName": "Nicholas Hoult",
+    "birthYear": 1989,
+    "deathYear": null,
+    "knownForTitles": "tt1392190"
+  },
+  {
+    "nconst": "nm9000099",
+    "primaryName": "Hugh Keays-Byrne",
+    "birthYear": null,
+    "deathYear": 2020,
+    "knownForTitles": "tt1392190"
+  },
+  {
+    "nconst": "nm9000100",
+    "primaryName": "Ben Affleck",
+    "birthYear": 1972,
+    "deathYear": null,
+    "knownForTitles": "tt2267998,tt0119217"
+  },
+  {
+    "nconst": "nm9000101",
+    "primaryName": "Rosamund Pike",
+    "birthYear": 1979,
+    "deathYear": null,
+    "knownForTitles": "tt2267998"
+  },
+  {
+    "nconst": "nm9000102",
+    "primaryName": "Neil Patrick Harris",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2267998"
+  },
+  {
+    "nconst": "nm9000103",
+    "primaryName": "Carrie Coon",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2267998"
+  },
+  {
+    "nconst": "nm9000104",
+    "primaryName": "Bryan Singer",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0114814"
+  },
+  {
+    "nconst": "nm9000105",
+    "primaryName": "Gabriel Byrne",
+    "birthYear": 1950,
+    "deathYear": null,
+    "knownForTitles": "tt0114814"
+  },
+  {
+    "nconst": "nm9000106",
+    "primaryName": "Chazz Palminteri",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0114814"
+  },
+  {
+    "nconst": "nm9000107",
+    "primaryName": "Benicio del Toro",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0114814"
+  },
+  {
+    "nconst": "nm9000108",
+    "primaryName": "Sam Mendes",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0169547"
+  },
+  {
+    "nconst": "nm9000109",
+    "primaryName": "Annette Bening",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0169547"
+  },
+  {
+    "nconst": "nm9000110",
+    "primaryName": "Thora Birch",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0169547"
+  },
+  {
+    "nconst": "nm9000111",
+    "primaryName": "Wes Bentley",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0169547"
+  },
+  {
+    "nconst": "nm9000112",
+    "primaryName": "Roman Polanski",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0253474"
+  },
+  {
+    "nconst": "nm9000113",
+    "primaryName": "Adrien Brody",
+    "birthYear": 1973,
+    "deathYear": null,
+    "knownForTitles": "tt0253474,tt2278388"
+  },
+  {
+    "nconst": "nm9000114",
+    "primaryName": "Thomas Kretschmann",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0253474"
+  },
+  {
+    "nconst": "nm9000115",
+    "primaryName": "Frank Finlay",
+    "birthYear": null,
+    "deathYear": 2016,
+    "knownForTitles": "tt0253474"
+  },
+  {
+    "nconst": "nm9000116",
+    "primaryName": "Florian Henckel von Donnersmarck",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0405094"
+  },
+  {
+    "nconst": "nm9000117",
+    "primaryName": "Ulrich Muhe",
+    "birthYear": null,
+    "deathYear": 2007,
+    "knownForTitles": "tt0405094"
+  },
+  {
+    "nconst": "nm9000118",
+    "primaryName": "Martina Gedeck",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0405094"
+  },
+  {
+    "nconst": "nm9000119",
+    "primaryName": "Sebastian Koch",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0405094"
+  },
+  {
+    "nconst": "nm9000120",
+    "primaryName": "Hayao Miyazaki",
+    "birthYear": 1941,
+    "deathYear": null,
+    "knownForTitles": "tt0245429,tt0347149,tt0096283,tt0119698"
+  },
+  {
+    "nconst": "nm9000121",
+    "primaryName": "Rumi Hiiragi",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0245429"
+  },
+  {
+    "nconst": "nm9000122",
+    "primaryName": "Miyu Irino",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0245429"
+  },
+  {
+    "nconst": "nm9000123",
+    "primaryName": "Mari Natsuki",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0245429"
+  },
+  {
+    "nconst": "nm9000124",
+    "primaryName": "Chieko Baisho",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0347149"
+  },
+  {
+    "nconst": "nm9000125",
+    "primaryName": "Takuya Kimura",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0347149"
+  },
+  {
+    "nconst": "nm9000126",
+    "primaryName": "Akihiro Miwa",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0347149"
+  },
+  {
+    "nconst": "nm9000127",
+    "primaryName": "Noriko Hidaka",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0096283"
+  },
+  {
+    "nconst": "nm9000128",
+    "primaryName": "Chika Sakamoto",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0096283"
+  },
+  {
+    "nconst": "nm9000129",
+    "primaryName": "Hitoshi Takagi",
+    "birthYear": null,
+    "deathYear": 2004,
+    "knownForTitles": "tt0096283"
+  },
+  {
+    "nconst": "nm9000130",
+    "primaryName": "John Lasseter",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0114709"
+  },
+  {
+    "nconst": "nm9000131",
+    "primaryName": "Tim Allen",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0114709,tt0435761"
+  },
+  {
+    "nconst": "nm9000132",
+    "primaryName": "Don Rickles",
+    "birthYear": null,
+    "deathYear": 2017,
+    "knownForTitles": "tt0114709"
+  },
+  {
+    "nconst": "nm9000133",
+    "primaryName": "Lee Unkrich",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0435761"
+  },
+  {
+    "nconst": "nm9000134",
+    "primaryName": "Joan Cusack",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0435761"
+  },
+  {
+    "nconst": "nm9000135",
+    "primaryName": "Ned Beatty",
+    "birthYear": null,
+    "deathYear": 2021,
+    "knownForTitles": "tt0435761"
+  },
+  {
+    "nconst": "nm9000136",
+    "primaryName": "Pete Docter",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt0198781,tt1049413,tt2096673"
+  },
+  {
+    "nconst": "nm9000137",
+    "primaryName": "John Goodman",
+    "birthYear": 1952,
+    "deathYear": null,
+    "knownForTitles": "tt0198781,tt0118715"
+  },
+  {
+    "nconst": "nm9000138",
+    "primaryName": "Billy Crystal",
+    "birthYear": 1948,
+    "deathYear": null,
+    "knownForTitles": "tt0198781"
+  },
+  {
+    "nconst": "nm9000139",
+    "primaryName": "Mary Gibbs",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0198781"
+  },
+  {
+    "nconst": "nm9000140",
+    "primaryName": "Steve Buscemi",
+    "birthYear": 1957,
+    "deathYear": null,
+    "knownForTitles": "tt0198781,tt0116282,tt0118715,tt0105236"
+  },
+  {
+    "nconst": "nm9000141",
+    "primaryName": "Andrew Stanton",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt0266543,tt0910970"
+  },
+  {
+    "nconst": "nm9000142",
+    "primaryName": "Albert Brooks",
+    "birthYear": 1947,
+    "deathYear": null,
+    "knownForTitles": "tt0266543"
+  },
+  {
+    "nconst": "nm9000143",
+    "primaryName": "Ellen DeGeneres",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0266543"
+  },
+  {
+    "nconst": "nm9000144",
+    "primaryName": "Alexander Gould",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0266543"
+  },
+  {
+    "nconst": "nm9000145",
+    "primaryName": "Willem Dafoe",
+    "birthYear": 1955,
+    "deathYear": null,
+    "knownForTitles": "tt0266543,tt0286716"
+  },
+  {
+    "nconst": "nm9000146",
+    "primaryName": "Ben Burtt",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0910970"
+  },
+  {
+    "nconst": "nm9000147",
+    "primaryName": "Elissa Knight",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0910970"
+  },
+  {
+    "nconst": "nm9000148",
+    "primaryName": "Jeff Garlin",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0910970"
+  },
+  {
+    "nconst": "nm9000149",
+    "primaryName": "Sigourney Weaver",
+    "birthYear": 1949,
+    "deathYear": null,
+    "knownForTitles": "tt0910970"
+  },
+  {
+    "nconst": "nm9000150",
+    "primaryName": "Edward Asner",
+    "birthYear": null,
+    "deathYear": 2021,
+    "knownForTitles": "tt1049413"
+  },
+  {
+    "nconst": "nm9000151",
+    "primaryName": "Jordan Nagai",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1049413"
+  },
+  {
+    "nconst": "nm9000152",
+    "primaryName": "Christopher Plummer",
+    "birthYear": null,
+    "deathYear": 2021,
+    "knownForTitles": "tt1049413"
+  },
+  {
+    "nconst": "nm9000153",
+    "primaryName": "Amy Poehler",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt2096673"
+  },
+  {
+    "nconst": "nm9000154",
+    "primaryName": "Phyllis Smith",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2096673"
+  },
+  {
+    "nconst": "nm9000155",
+    "primaryName": "Lewis Black",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2096673"
+  },
+  {
+    "nconst": "nm9000156",
+    "primaryName": "Bill Hader",
+    "birthYear": 1978,
+    "deathYear": null,
+    "knownForTitles": "tt2096673"
+  },
+  {
+    "nconst": "nm9000157",
+    "primaryName": "Brad Bird",
+    "birthYear": 1957,
+    "deathYear": null,
+    "knownForTitles": "tt0317705,tt0382932"
+  },
+  {
+    "nconst": "nm9000158",
+    "primaryName": "Craig T. Nelson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0317705"
+  },
+  {
+    "nconst": "nm9000159",
+    "primaryName": "Holly Hunter",
+    "birthYear": 1958,
+    "deathYear": null,
+    "knownForTitles": "tt0317705"
+  },
+  {
+    "nconst": "nm9000160",
+    "primaryName": "Jason Lee",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0317705"
+  },
+  {
+    "nconst": "nm9000161",
+    "primaryName": "Patton Oswalt",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0382932"
+  },
+  {
+    "nconst": "nm9000162",
+    "primaryName": "Lou Romano",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0382932"
+  },
+  {
+    "nconst": "nm9000163",
+    "primaryName": "Peter O’Toole",
+    "birthYear": null,
+    "deathYear": 2013,
+    "knownForTitles": "tt0382932"
+  },
+  {
+    "nconst": "nm9000164",
+    "primaryName": "Janeane Garofalo",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0382932"
+  },
+  {
+    "nconst": "nm9000165",
+    "primaryName": "Dean DeBlois",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0892769"
+  },
+  {
+    "nconst": "nm9000166",
+    "primaryName": "Jay Baruchel",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0892769"
+  },
+  {
+    "nconst": "nm9000167",
+    "primaryName": "Gerard Butler",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0892769"
+  },
+  {
+    "nconst": "nm9000168",
+    "primaryName": "America Ferrera",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0892769"
+  },
+  {
+    "nconst": "nm9000169",
+    "primaryName": "Craig Ferguson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0892769"
+  },
+  {
+    "nconst": "nm9000170",
+    "primaryName": "Alejandro G. Inarritu",
+    "birthYear": 1963,
+    "deathYear": null,
+    "knownForTitles": "tt0245712,tt1663202"
+  },
+  {
+    "nconst": "nm9000171",
+    "primaryName": "Gael Garcia Bernal",
+    "birthYear": 1978,
+    "deathYear": null,
+    "knownForTitles": "tt0245712"
+  },
+  {
+    "nconst": "nm9000172",
+    "primaryName": "Emilio Echevarria",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0245712"
+  },
+  {
+    "nconst": "nm9000173",
+    "primaryName": "Goya Toledo",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0245712"
+  },
+  {
+    "nconst": "nm9000174",
+    "primaryName": "Domhnall Gleeson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1663202"
+  },
+  {
+    "nconst": "nm9000175",
+    "primaryName": "Will Poulter",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1663202"
+  },
+  {
+    "nconst": "nm9000176",
+    "primaryName": "Wes Anderson",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt2278388,tt0265666"
+  },
+  {
+    "nconst": "nm9000177",
+    "primaryName": "Tony Revolori",
+    "birthYear": 1996,
+    "deathYear": null,
+    "knownForTitles": "tt2278388"
+  },
+  {
+    "nconst": "nm9000178",
+    "primaryName": "Saoirse Ronan",
+    "birthYear": 1994,
+    "deathYear": null,
+    "knownForTitles": "tt2278388"
+  },
+  {
+    "nconst": "nm9000179",
+    "primaryName": "Gene Hackman",
+    "birthYear": 1930,
+    "deathYear": 2025,
+    "knownForTitles": "tt0265666"
+  },
+  {
+    "nconst": "nm9000180",
+    "primaryName": "Anjelica Huston",
+    "birthYear": 1951,
+    "deathYear": null,
+    "knownForTitles": "tt0265666"
+  },
+  {
+    "nconst": "nm9000181",
+    "primaryName": "Ben Stiller",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt0265666"
+  },
+  {
+    "nconst": "nm9000182",
+    "primaryName": "Sam Raimi",
+    "birthYear": 1959,
+    "deathYear": null,
+    "knownForTitles": "tt0286716,tt0316654"
+  },
+  {
+    "nconst": "nm9000183",
+    "primaryName": "Tobey Maguire",
+    "birthYear": 1975,
+    "deathYear": null,
+    "knownForTitles": "tt0286716,tt0316654"
+  },
+  {
+    "nconst": "nm9000184",
+    "primaryName": "James Franco",
+    "birthYear": 1978,
+    "deathYear": null,
+    "knownForTitles": "tt0286716,tt0910936"
+  },
+  {
+    "nconst": "nm9000185",
+    "primaryName": "Alfred Molina",
+    "birthYear": 1953,
+    "deathYear": null,
+    "knownForTitles": "tt0316654"
+  },
+  {
+    "nconst": "nm9000186",
+    "primaryName": "Joss Whedon",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0848228"
+  },
+  {
+    "nconst": "nm9000187",
+    "primaryName": "Robert Downey Jr.",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt0848228,tt4154756,tt4154796"
+  },
+  {
+    "nconst": "nm9000188",
+    "primaryName": "Chris Evans",
+    "birthYear": 1981,
+    "deathYear": null,
+    "knownForTitles": "tt0848228,tt4154796"
+  },
+  {
+    "nconst": "nm9000189",
+    "primaryName": "Anthony Russo",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt4154756,tt4154796"
+  },
+  {
+    "nconst": "nm9000190",
+    "primaryName": "Chris Hemsworth",
+    "birthYear": 1983,
+    "deathYear": null,
+    "knownForTitles": "tt4154756"
+  },
+  {
+    "nconst": "nm9000191",
+    "primaryName": "Josh Brolin",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt4154756,tt4154796,tt0477348"
+  },
+  {
+    "nconst": "nm9000192",
+    "primaryName": "James Gunn",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2015381"
+  },
+  {
+    "nconst": "nm9000193",
+    "primaryName": "Chris Pratt",
+    "birthYear": 1979,
+    "deathYear": null,
+    "knownForTitles": "tt2015381"
+  },
+  {
+    "nconst": "nm9000194",
+    "primaryName": "Zoe Saldana",
+    "birthYear": 1978,
+    "deathYear": null,
+    "knownForTitles": "tt2015381"
+  },
+  {
+    "nconst": "nm9000195",
+    "primaryName": "Dave Bautista",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2015381"
+  },
+  {
+    "nconst": "nm9000196",
+    "primaryName": "Bradley Cooper",
+    "birthYear": 1975,
+    "deathYear": null,
+    "knownForTitles": "tt2015381"
+  },
+  {
+    "nconst": "nm9000197",
+    "primaryName": "Todd Phillips",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt7286456"
+  },
+  {
+    "nconst": "nm9000198",
+    "primaryName": "Robert De Niro",
+    "birthYear": 1943,
+    "deathYear": null,
+    "knownForTitles": "tt7286456"
+  },
+  {
+    "nconst": "nm9000199",
+    "primaryName": "Zazie Beetz",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt7286456"
+  },
+  {
+    "nconst": "nm9000200",
+    "primaryName": "Darren Aronofsky",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0947798,tt0180093"
+  },
+  {
+    "nconst": "nm9000201",
+    "primaryName": "Natalie Portman",
+    "birthYear": 1981,
+    "deathYear": null,
+    "knownForTitles": "tt0947798"
+  },
+  {
+    "nconst": "nm9000202",
+    "primaryName": "Mila Kunis",
+    "birthYear": 1983,
+    "deathYear": null,
+    "knownForTitles": "tt0947798"
+  },
+  {
+    "nconst": "nm9000203",
+    "primaryName": "Vincent Cassel",
+    "birthYear": 1966,
+    "deathYear": null,
+    "knownForTitles": "tt0947798"
+  },
+  {
+    "nconst": "nm9000204",
+    "primaryName": "Barbara Hershey",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0947798"
+  },
+  {
+    "nconst": "nm9000205",
+    "primaryName": "Ellen Burstyn",
+    "birthYear": 1932,
+    "deathYear": null,
+    "knownForTitles": "tt0180093"
+  },
+  {
+    "nconst": "nm9000206",
+    "primaryName": "Jared Leto",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt0180093,tt0790636"
+  },
+  {
+    "nconst": "nm9000207",
+    "primaryName": "Jennifer Connelly",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt0180093,tt0268978"
+  },
+  {
+    "nconst": "nm9000208",
+    "primaryName": "Marlon Wayans",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0180093"
+  },
+  {
+    "nconst": "nm9000209",
+    "primaryName": "Olivier Nakache",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1675434"
+  },
+  {
+    "nconst": "nm9000210",
+    "primaryName": "Francois Cluzet",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1675434"
+  },
+  {
+    "nconst": "nm9000211",
+    "primaryName": "Omar Sy",
+    "birthYear": 1978,
+    "deathYear": null,
+    "knownForTitles": "tt1675434"
+  },
+  {
+    "nconst": "nm9000212",
+    "primaryName": "Anne Le Ny",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1675434"
+  },
+  {
+    "nconst": "nm9000213",
+    "primaryName": "Yoji Matsuda",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119698"
+  },
+  {
+    "nconst": "nm9000214",
+    "primaryName": "Yuriko Ishida",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119698"
+  },
+  {
+    "nconst": "nm9000215",
+    "primaryName": "Yuko Tanaka",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119698"
+  },
+  {
+    "nconst": "nm9000216",
+    "primaryName": "Tony Kaye",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0120586"
+  },
+  {
+    "nconst": "nm9000217",
+    "primaryName": "Edward Furlong",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt0120586"
+  },
+  {
+    "nconst": "nm9000218",
+    "primaryName": "Beverly D’Angelo",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0120586"
+  },
+  {
+    "nconst": "nm9000219",
+    "primaryName": "Ron Howard",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0268978"
+  },
+  {
+    "nconst": "nm9000220",
+    "primaryName": "Ed Harris",
+    "birthYear": 1950,
+    "deathYear": null,
+    "knownForTitles": "tt0268978"
+  },
+  {
+    "nconst": "nm9000221",
+    "primaryName": "Paul Bettany",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt0268978"
+  },
+  {
+    "nconst": "nm9000222",
+    "primaryName": "Gus Van Sant",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119217"
+  },
+  {
+    "nconst": "nm9000223",
+    "primaryName": "Robin Williams",
+    "birthYear": 1951,
+    "deathYear": 2014,
+    "knownForTitles": "tt0119217"
+  },
+  {
+    "nconst": "nm9000224",
+    "primaryName": "Minnie Driver",
+    "birthYear": 1970,
+    "deathYear": null,
+    "knownForTitles": "tt0119217"
+  },
+  {
+    "nconst": "nm9000225",
+    "primaryName": "Michael Clarke Duncan",
+    "birthYear": 1957,
+    "deathYear": 2012,
+    "knownForTitles": "tt0120689"
+  },
+  {
+    "nconst": "nm9000226",
+    "primaryName": "David Morse",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0120689"
+  },
+  {
+    "nconst": "nm9000227",
+    "primaryName": "Bonnie Hunt",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0120689"
+  },
+  {
+    "nconst": "nm9000228",
+    "primaryName": "Michael J. Fox",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt0088763"
+  },
+  {
+    "nconst": "nm9000229",
+    "primaryName": "Christopher Lloyd",
+    "birthYear": 1938,
+    "deathYear": null,
+    "knownForTitles": "tt0088763"
+  },
+  {
+    "nconst": "nm9000230",
+    "primaryName": "Lea Thompson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0088763"
+  },
+  {
+    "nconst": "nm9000231",
+    "primaryName": "Crispin Glover",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0088763"
+  },
+  {
+    "nconst": "nm9000232",
+    "primaryName": "Sam Neill",
+    "birthYear": 1947,
+    "deathYear": null,
+    "knownForTitles": "tt0107290"
+  },
+  {
+    "nconst": "nm9000233",
+    "primaryName": "Laura Dern",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0107290"
+  },
+  {
+    "nconst": "nm9000234",
+    "primaryName": "Jeff Goldblum",
+    "birthYear": 1952,
+    "deathYear": null,
+    "knownForTitles": "tt0107290"
+  },
+  {
+    "nconst": "nm9000235",
+    "primaryName": "Richard Attenborough",
+    "birthYear": 1923,
+    "deathYear": 2014,
+    "knownForTitles": "tt0107290"
+  },
+  {
+    "nconst": "nm9000236",
+    "primaryName": "Barry Sonnenfeld",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119654"
+  },
+  {
+    "nconst": "nm9000237",
+    "primaryName": "Tommy Lee Jones",
+    "birthYear": 1946,
+    "deathYear": null,
+    "knownForTitles": "tt0119654,tt0477348"
+  },
+  {
+    "nconst": "nm9000238",
+    "primaryName": "Will Smith",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt0119654"
+  },
+  {
+    "nconst": "nm9000239",
+    "primaryName": "Linda Fiorentino",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119654"
+  },
+  {
+    "nconst": "nm9000240",
+    "primaryName": "Vincent D’Onofrio",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119654"
+  },
+  {
+    "nconst": "nm9000241",
+    "primaryName": "Joel Coen",
+    "birthYear": 1954,
+    "deathYear": null,
+    "knownForTitles": "tt0116282,tt0118715,tt0477348"
+  },
+  {
+    "nconst": "nm9000242",
+    "primaryName": "Frances McDormand",
+    "birthYear": 1957,
+    "deathYear": null,
+    "knownForTitles": "tt0116282"
+  },
+  {
+    "nconst": "nm9000243",
+    "primaryName": "William H. Macy",
+    "birthYear": 1950,
+    "deathYear": null,
+    "knownForTitles": "tt0116282,tt3170832"
+  },
+  {
+    "nconst": "nm9000244",
+    "primaryName": "Peter Stormare",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0116282"
+  },
+  {
+    "nconst": "nm9000245",
+    "primaryName": "Jeff Bridges",
+    "birthYear": 1949,
+    "deathYear": null,
+    "knownForTitles": "tt0118715"
+  },
+  {
+    "nconst": "nm9000246",
+    "primaryName": "Julianne Moore",
+    "birthYear": 1960,
+    "deathYear": null,
+    "knownForTitles": "tt0118715"
+  },
+  {
+    "nconst": "nm9000247",
+    "primaryName": "Javier Bardem",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt0477348"
+  },
+  {
+    "nconst": "nm9000248",
+    "primaryName": "Kelly Macdonald",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0477348"
+  },
+  {
+    "nconst": "nm9000249",
+    "primaryName": "Denis Villeneuve",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt1392214,tt2543164,tt1856101,tt1160419"
+  },
+  {
+    "nconst": "nm9000250",
+    "primaryName": "Jake Gyllenhaal",
+    "birthYear": 1980,
+    "deathYear": null,
+    "knownForTitles": "tt1392214,tt0246578"
+  },
+  {
+    "nconst": "nm9000251",
+    "primaryName": "Viola Davis",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt1392214"
+  },
+  {
+    "nconst": "nm9000252",
+    "primaryName": "Paul Dano",
+    "birthYear": 1984,
+    "deathYear": null,
+    "knownForTitles": "tt1392214"
+  },
+  {
+    "nconst": "nm9000253",
+    "primaryName": "Amy Adams",
+    "birthYear": 1974,
+    "deathYear": null,
+    "knownForTitles": "tt2543164,tt1798709"
+  },
+  {
+    "nconst": "nm9000254",
+    "primaryName": "Jeremy Renner",
+    "birthYear": 1971,
+    "deathYear": null,
+    "knownForTitles": "tt2543164"
+  },
+  {
+    "nconst": "nm9000255",
+    "primaryName": "Forest Whitaker",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt2543164"
+  },
+  {
+    "nconst": "nm9000256",
+    "primaryName": "Harrison Ford",
+    "birthYear": 1942,
+    "deathYear": null,
+    "knownForTitles": "tt1856101"
+  },
+  {
+    "nconst": "nm9000257",
+    "primaryName": "Ana de Armas",
+    "birthYear": 1988,
+    "deathYear": null,
+    "knownForTitles": "tt1856101"
+  },
+  {
+    "nconst": "nm9000258",
+    "primaryName": "Sylvia Hoeks",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1856101"
+  },
+  {
+    "nconst": "nm9000259",
+    "primaryName": "Timothee Chalamet",
+    "birthYear": 1995,
+    "deathYear": null,
+    "knownForTitles": "tt1160419"
+  },
+  {
+    "nconst": "nm9000260",
+    "primaryName": "Rebecca Ferguson",
+    "birthYear": 1983,
+    "deathYear": null,
+    "knownForTitles": "tt1160419"
+  },
+  {
+    "nconst": "nm9000261",
+    "primaryName": "Oscar Isaac",
+    "birthYear": 1979,
+    "deathYear": null,
+    "knownForTitles": "tt1160419"
+  },
+  {
+    "nconst": "nm9000262",
+    "primaryName": "Zendaya",
+    "birthYear": 1996,
+    "deathYear": null,
+    "knownForTitles": "tt1160419"
+  },
+  {
+    "nconst": "nm9000263",
+    "primaryName": "Steven Soderbergh",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0169858"
+  },
+  {
+    "nconst": "nm9000264",
+    "primaryName": "George Clooney",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt0169858"
+  },
+  {
+    "nconst": "nm9000265",
+    "primaryName": "Julia Roberts",
+    "birthYear": 1967,
+    "deathYear": null,
+    "knownForTitles": "tt0169858"
+  },
+  {
+    "nconst": "nm9000266",
+    "primaryName": "Haley Joel Osment",
+    "birthYear": 1988,
+    "deathYear": null,
+    "knownForTitles": "tt0212720,tt0167404"
+  },
+  {
+    "nconst": "nm9000267",
+    "primaryName": "Jude Law",
+    "birthYear": 1972,
+    "deathYear": null,
+    "knownForTitles": "tt0212720"
+  },
+  {
+    "nconst": "nm9000268",
+    "primaryName": "Frances O’Connor",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0212720"
+  },
+  {
+    "nconst": "nm9000269",
+    "primaryName": "M. Night Shyamalan",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0167404"
+  },
+  {
+    "nconst": "nm9000270",
+    "primaryName": "Toni Collette",
+    "birthYear": 1972,
+    "deathYear": null,
+    "knownForTitles": "tt0167404"
+  },
+  {
+    "nconst": "nm9000271",
+    "primaryName": "Mel Gibson",
+    "birthYear": 1956,
+    "deathYear": null,
+    "knownForTitles": "tt0112573,tt0112573"
+  },
+  {
+    "nconst": "nm9000272",
+    "primaryName": "Sophie Marceau",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0112573"
+  },
+  {
+    "nconst": "nm9000273",
+    "primaryName": "Patrick McGoohan",
+    "birthYear": null,
+    "deathYear": 2009,
+    "knownForTitles": "tt0112573"
+  },
+  {
+    "nconst": "nm9000274",
+    "primaryName": "Richard Kelly",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0246578"
+  },
+  {
+    "nconst": "nm9000275",
+    "primaryName": "Jena Malone",
+    "birthYear": 1984,
+    "deathYear": null,
+    "knownForTitles": "tt0246578"
+  },
+  {
+    "nconst": "nm9000276",
+    "primaryName": "Mary McDonnell",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0246578"
+  },
+  {
+    "nconst": "nm9000277",
+    "primaryName": "Patrick Swayze",
+    "birthYear": null,
+    "deathYear": 2009,
+    "knownForTitles": "tt0246578"
+  },
+  {
+    "nconst": "nm9000278",
+    "primaryName": "Shane Carruth",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0289879,tt0289879"
+  },
+  {
+    "nconst": "nm9000279",
+    "primaryName": "David Sullivan",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0289879"
+  },
+  {
+    "nconst": "nm9000280",
+    "primaryName": "Casey Gooden",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0289879"
+  },
+  {
+    "nconst": "nm9000281",
+    "primaryName": "Lenny Abrahamson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt3170832"
+  },
+  {
+    "nconst": "nm9000282",
+    "primaryName": "Brie Larson",
+    "birthYear": 1989,
+    "deathYear": null,
+    "knownForTitles": "tt3170832"
+  },
+  {
+    "nconst": "nm9000283",
+    "primaryName": "Jacob Tremblay",
+    "birthYear": 2006,
+    "deathYear": null,
+    "knownForTitles": "tt3170832"
+  },
+  {
+    "nconst": "nm9000284",
+    "primaryName": "Joan Allen",
+    "birthYear": 1956,
+    "deathYear": null,
+    "knownForTitles": "tt3170832"
+  },
+  {
+    "nconst": "nm9000285",
+    "primaryName": "Spike Jonze",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt1798709"
+  },
+  {
+    "nconst": "nm9000286",
+    "primaryName": "Rooney Mara",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt1798709"
+  },
+  {
+    "nconst": "nm9000287",
+    "primaryName": "David Gordon Green",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0910936"
+  },
+  {
+    "nconst": "nm9000288",
+    "primaryName": "Seth Rogen",
+    "birthYear": 1982,
+    "deathYear": null,
+    "knownForTitles": "tt0910936"
+  },
+  {
+    "nconst": "nm9000289",
+    "primaryName": "Danny McBride",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0910936"
+  },
+  {
+    "nconst": "nm9000290",
+    "primaryName": "David Carradine",
+    "birthYear": null,
+    "deathYear": 2009,
+    "knownForTitles": "tt0378194"
+  },
+  {
+    "nconst": "nm9000291",
+    "primaryName": "Daryl Hannah",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0378194"
+  },
+  {
+    "nconst": "nm9000292",
+    "primaryName": "Michael Madsen",
+    "birthYear": 1957,
+    "deathYear": null,
+    "knownForTitles": "tt0378194,tt0105236"
+  },
+  {
+    "nconst": "nm9000293",
+    "primaryName": "Lucy Liu",
+    "birthYear": 1968,
+    "deathYear": null,
+    "knownForTitles": "tt0266697"
+  },
+  {
+    "nconst": "nm9000294",
+    "primaryName": "Vivica A. Fox",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0266697"
+  },
+  {
+    "nconst": "nm9000295",
+    "primaryName": "Sonny Chiba",
+    "birthYear": null,
+    "deathYear": 2021,
+    "knownForTitles": "tt0266697"
+  },
+  {
+    "nconst": "nm9000296",
+    "primaryName": "Harvey Keitel",
+    "birthYear": 1939,
+    "deathYear": null,
+    "knownForTitles": "tt0105236"
+  },
+  {
+    "nconst": "nm9000297",
+    "primaryName": "Tim Roth",
+    "birthYear": 1961,
+    "deathYear": null,
+    "knownForTitles": "tt0105236"
+  },
+  {
+    "nconst": "nm9000298",
+    "primaryName": "Curtis Hanson",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0119488"
+  },
+  {
+    "nconst": "nm9000299",
+    "primaryName": "Kim Basinger",
+    "birthYear": 1953,
+    "deathYear": null,
+    "knownForTitles": "tt0119488"
+  },
+  {
+    "nconst": "nm9000300",
+    "primaryName": "Christopher Walken",
+    "birthYear": 1943,
+    "deathYear": null,
+    "knownForTitles": "tt0264464"
+  },
+  {
+    "nconst": "nm9000301",
+    "primaryName": "Doug Liman",
+    "birthYear": 1965,
+    "deathYear": null,
+    "knownForTitles": "tt0257044,tt1631867"
+  },
+  {
+    "nconst": "nm9000302",
+    "primaryName": "Franka Potente",
+    "birthYear": 1974,
+    "deathYear": null,
+    "knownForTitles": "tt0257044"
+  },
+  {
+    "nconst": "nm9000303",
+    "primaryName": "Chris Cooper",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0257044"
+  },
+  {
+    "nconst": "nm9000304",
+    "primaryName": "Clive Owen",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0257044"
+  },
+  {
+    "nconst": "nm9000305",
+    "primaryName": "Tom Cruise",
+    "birthYear": 1962,
+    "deathYear": null,
+    "knownForTitles": "tt1631867"
+  },
+  {
+    "nconst": "nm9000306",
+    "primaryName": "Emily Blunt",
+    "birthYear": 1983,
+    "deathYear": null,
+    "knownForTitles": "tt1631867"
+  },
+  {
+    "nconst": "nm9000307",
+    "primaryName": "Bill Paxton",
+    "birthYear": null,
+    "deathYear": 2017,
+    "knownForTitles": "tt1631867"
+  },
+  {
+    "nconst": "nm9000308",
+    "primaryName": "Gore Verbinski",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0325980"
+  },
+  {
+    "nconst": "nm9000309",
+    "primaryName": "Johnny Depp",
+    "birthYear": 1963,
+    "deathYear": null,
+    "knownForTitles": "tt0325980"
+  },
+  {
+    "nconst": "nm9000310",
+    "primaryName": "Orlando Bloom",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt0325980"
+  },
+  {
+    "nconst": "nm9000311",
+    "primaryName": "Keira Knightley",
+    "birthYear": 1985,
+    "deathYear": null,
+    "knownForTitles": "tt0325980"
+  },
+  {
+    "nconst": "nm9000312",
+    "primaryName": "Geoffrey Rush",
+    "birthYear": 1951,
+    "deathYear": null,
+    "knownForTitles": "tt0325980"
+  },
+  {
+    "nconst": "nm9000313",
+    "primaryName": "Sean Penn",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0758758"
+  },
+  {
+    "nconst": "nm9000314",
+    "primaryName": "Emile Hirsch",
+    "birthYear": 1985,
+    "deathYear": null,
+    "knownForTitles": "tt0758758"
+  },
+  {
+    "nconst": "nm9000315",
+    "primaryName": "Hal Holbrook",
+    "birthYear": null,
+    "deathYear": 2021,
+    "knownForTitles": "tt0758758"
+  },
+  {
+    "nconst": "nm9000316",
+    "primaryName": "Catherine Keener",
+    "birthYear": 1959,
+    "deathYear": null,
+    "knownForTitles": "tt0758758,tt5052448"
+  },
+  {
+    "nconst": "nm9000317",
+    "primaryName": "Jean-Marc Vallee",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0790636"
+  },
+  {
+    "nconst": "nm9000318",
+    "primaryName": "Jennifer Garner",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt0790636"
+  },
+  {
+    "nconst": "nm9000319",
+    "primaryName": "Steve McQueen",
+    "birthYear": 1969,
+    "deathYear": null,
+    "knownForTitles": "tt2024544"
+  },
+  {
+    "nconst": "nm9000320",
+    "primaryName": "Chiwetel Ejiofor",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt2024544"
+  },
+  {
+    "nconst": "nm9000321",
+    "primaryName": "Michael Fassbender",
+    "birthYear": 1977,
+    "deathYear": null,
+    "knownForTitles": "tt2024544"
+  },
+  {
+    "nconst": "nm9000322",
+    "primaryName": "Lupita Nyong’o",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt2024544"
+  },
+  {
+    "nconst": "nm9000323",
+    "primaryName": "Benedict Cumberbatch",
+    "birthYear": 1976,
+    "deathYear": null,
+    "knownForTitles": "tt2024544"
+  },
+  {
+    "nconst": "nm9000324",
+    "primaryName": "Jordan Peele",
+    "birthYear": 1979,
+    "deathYear": null,
+    "knownForTitles": "tt5052448"
+  },
+  {
+    "nconst": "nm9000325",
+    "primaryName": "Daniel Kaluuya",
+    "birthYear": 1989,
+    "deathYear": null,
+    "knownForTitles": "tt5052448"
+  },
+  {
+    "nconst": "nm9000326",
+    "primaryName": "Allison Williams",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt5052448"
+  },
+  {
+    "nconst": "nm9000327",
+    "primaryName": "Bradley Whitford",
+    "birthYear": null,
+    "deathYear": null,
+    "knownForTitles": "tt5052448"
+  }
+]
