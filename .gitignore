@@ -14,3 +14,6 @@ npm-debug.log*
 # IMDb dataset dumps pulled by `npm run import` — large, and licensed for
 # personal, non-commercial use, so never committed.
 data/.imdb-cache/
+
+# Local agent/editor state
+.claude/
