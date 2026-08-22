@@ -14,5 +14,8 @@ RUN npm ci --omit=dev
 COPY . .
 
 EXPOSE 3000
-USER node
-CMD ["node", "bin/www"]
+
+# Stays root here: a mounted volume (a Fly Volume, a Docker named volume, ...)
+# arrives empty and root-owned, and bin/entrypoint.js needs root to fix that
+# before it drops to the unprivileged `node` user itself. See that file.
+CMD ["node", "bin/entrypoint.js"]

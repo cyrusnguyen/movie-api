@@ -244,12 +244,45 @@ the first request that needs them, so no separate migration step is required.
 ### A host with a disk
 
 For persistent SQLite and no cold starts, deploy to something with a real
-filesystem — Render, Fly.io and Railway all work. `Dockerfile` is kept current:
+filesystem instead of Vercel — Fly.io, Render and Railway all work.
+`Dockerfile` is kept current:
 
 ```bash
 docker build -t movie-api .
-docker run -p 3000:3000 -e JWT_SECRET=$(openssl rand -hex 32) movie-api
+docker run -p 3000:3000 \
+  -e JWT_SECRET=$(openssl rand -hex 32) \
+  -v "$(pwd)/data:/data" -e SQLITE_FILE=/data/movies.db \
+  movie-api
 ```
+
+The container starts as root only long enough to `chown` a freshly-mounted,
+empty volume so the unprivileged `node` user it then switches to can write to
+it — see `bin/entrypoint.js`. Skip the `-v`/`SQLITE_FILE` pair and the database
+just lives inside the container's own writable layer instead, which is fine
+for a one-off `docker run` but is lost on the next `docker build`.
+
+#### Fly.io
+
+`fly.toml` is ready to go: a `movie_data` volume mounted at `/data`, a health
+check on `/health`, and `SQLITE_FILE` already pointed at the volume.
+
+```bash
+fly launch --no-deploy        # reuses fly.toml; pick a unique app name if asked
+fly volumes create movie_data --region syd --size 1
+fly secrets set JWT_SECRET=$(openssl rand -hex 32)
+fly deploy
+```
+
+- **`JWT_SECRET` is a secret, not an environment variable.** `fly secrets set`
+  stores it encrypted and injects it at runtime; `fly.toml`'s `[env]` block is
+  plain text committed to the repo, so it is never the right place for it.
+- The volume makes the catalogue and any accounts durable across deploys and
+  restarts — unlike the Vercel deployment above, which rebuilds SQLite from
+  the sample catalogue on every cold start.
+- Once the frontend has a real URL, uncomment and set `CORS_ORIGIN` in
+  `fly.toml` and `fly deploy` again.
+- `primary_region` defaults to `syd`; change it in `fly.toml` to deploy closer
+  to your users, and create the volume in the same region.
 
 ## Frontend
 

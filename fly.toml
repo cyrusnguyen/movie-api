@@ -1,0 +1,38 @@
+# Fly.io app configuration. See https://fly.io/docs/reference/configuration/
+#
+# `app` is a placeholder — `fly launch` will ask to rename it if the name is
+# already taken, and rewrites this line either way.
+app = "movie-api"
+primary_region = "syd"
+
+[build]
+
+[env]
+  PORT = "3000"
+  NODE_ENV = "production"
+  # The volume mounted below. better-sqlite3 needs the database file itself
+  # to live on it, or every deploy starts from an empty catalogue again.
+  SQLITE_FILE = "/data/movies.db"
+  # Set to the deployed frontend's origin once you have one, e.g.
+  # CORS_ORIGIN = "https://your-frontend.vercel.app"
+  # then `fly deploy` again — env vars here are not secret, but nothing in
+  # this file needs to be, unlike JWT_SECRET (see README: use `fly secrets set`).
+
+[mounts]
+  source = "movie_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "15s"
+    method = "GET"
+    timeout = "5s"
+    path = "/health"
