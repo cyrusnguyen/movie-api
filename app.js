@@ -31,7 +31,25 @@ if (secretProblem) {
   console.error(`\nRefusing to serve: ${secretProblem}\n`);
 }
 
-const knex = require('knex')(knexConfig);
+/**
+ * Created on first use, not at import.
+ *
+ * better-sqlite3 is a native addon, and knex resolves its driver eagerly. If
+ * that binary will not load on the host's runtime, building the instance here
+ * would throw while the module loads and take the whole app with it — no
+ * Swagger, no 404 handler, nothing. Deferring it keeps everything that does not
+ * need the database working, and turns a driver problem into one clear error on
+ * the routes that do.
+ */
+let knexInstance = null;
+
+function getKnex() {
+  if (!knexInstance) {
+    knexInstance = require('knex')(knexConfig);
+  }
+
+  return knexInstance;
+}
 
 const app = express();
 
@@ -79,10 +97,28 @@ app.use(express.urlencoded({ extended: false, limit: '16kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(apiLimiter);
 
-app.use((req, res, next) => {
-  req.db = knex;
-  next();
-});
+/**
+ * Attaches the database handle. Applied only to the routes that need one, so a
+ * driver that will not load still leaves the API reference and the error
+ * handlers working — and says plainly which part is broken.
+ */
+function attachDb(req, res, next) {
+  try {
+    req.db = getKnex();
+  } catch (err) {
+    console.error('Could not initialise the database driver:', err);
+
+    return res.status(503).json({
+      error: true,
+      message: 'The database is unavailable.',
+      reason: err.message,
+    });
+  }
+
+  return next();
+}
+
+const withDb = [attachDb, ensureReadyMiddleware];
 
 if (secretProblem) {
   // Serve one honest error rather than failing to boot. The message names the
@@ -95,7 +131,7 @@ if (secretProblem) {
   });
 }
 
-app.get('/health', async (req, res) => {
+app.get('/health', attachDb, async (req, res) => {
   try {
     await req.db.raw('select 1');
     res.json({ status: 'ok', database: 'up' });
@@ -105,12 +141,12 @@ app.get('/health', async (req, res) => {
   }
 });
 
-app.use('/movies', ensureReadyMiddleware, moviesRouter);
-app.use('/people', ensureReadyMiddleware, peopleRouter);
-app.use('/user', ensureReadyMiddleware, usersRouter);
+app.use('/movies', withDb, moviesRouter);
+app.use('/people', withDb, peopleRouter);
+app.use('/user', withDb, usersRouter);
 app.use(
   '/user/:email/profile',
-  ensureReadyMiddleware,
+  withDb,
   (req, res, next) => {
     req.email = req.params.email;
     next();
@@ -148,4 +184,6 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-module.exports.knex = knex;
+
+// A getter, so importing the app never forces the driver to load.
+Object.defineProperty(module.exports, 'knex', { get: getKnex, configurable: true });

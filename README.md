@@ -193,6 +193,18 @@ Also set `CORS_ORIGIN` to the origin of whatever front end will call it.
 | `CORS_ORIGIN` | Your front end's origin, e.g. `https://your-app.vercel.app`. |
 | `DATABASE_URL` | Optional but recommended — see below. |
 
+#### If the deployment looks broken
+
+Every startup failure now answers with JSON rather than an empty page, so open
+the URL and read the response:
+
+| Response | Meaning |
+|---|---|
+| `"JWT_SECRET is missing or too short"` | Set `JWT_SECRET` in the project's environment variables and redeploy. |
+| `"The database is unavailable"` | The SQLite driver would not load on this runtime. Set `DATABASE_URL` to use MySQL. |
+| `"The API failed to start"` | Something else threw during startup; `reason` names it and the full stack is in the function logs. |
+| Genuinely blank, or a login page | Not the API. Vercel protects preview deployments by default — check **Settings → Deployment Protection**, or open the link while signed in to the Vercel account that owns it. |
+
 #### A caveat about storage
 
 Serverless filesystems are read-only apart from `/tmp`, and instances are
