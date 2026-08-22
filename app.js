@@ -9,11 +9,8 @@ const cors = require('cors');
 const express = require('express');
 const helmet = require('helmet');
 const logger = require('morgan');
-const swaggerUI = require('swagger-ui-express');
-
 const config = require('./config');
 const knexConfig = require('./knexfile');
-const swaggerDocument = require('./docs/swagger.json');
 const { apiLimiter } = require('./middleware/rateLimit');
 const { ensureReadyMiddleware } = require('./db/bootstrap');
 
@@ -21,6 +18,7 @@ const moviesRouter = require('./routes/movies');
 const peopleRouter = require('./routes/people');
 const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
+const docsRouter = require('./routes/docs');
 
 // Checked, not thrown: a throw at module scope would take down a serverless
 // function and serve a blank page. If it is missing, every route answers with
@@ -59,13 +57,15 @@ app.disable('x-powered-by');
 
 app.use(
   helmet({
-    // The Swagger UI bundle needs inline styles and its own scripts. Everything
-    // else on this origin is JSON, so this is the only page it applies to.
+    // Only the API reference page needs these: it loads Swagger UI from a CDN
+    // and boots it with an inline script. Everything else here is JSON.
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'script-src': ["'self'", "'unsafe-inline'"],
+        'script-src': ["'self'", "'unsafe-inline'", docsRouter.CDN_CSP],
+        'style-src': ["'self'", "'unsafe-inline'", docsRouter.CDN_CSP],
         'img-src': ["'self'", 'data:', 'https:'],
+        'connect-src': ["'self'"],
       },
     },
     crossOriginEmbedderPolicy: false,
@@ -154,8 +154,7 @@ app.use(
   profileRouter
 );
 
-app.use('/', swaggerUI.serve);
-app.get('/', swaggerUI.setup(swaggerDocument, { customSiteTitle: 'Movie API — reference' }));
+app.use('/', docsRouter);
 
 app.use((req, res, next) => {
   next(createError(404, `Cannot ${req.method} ${req.path}`));

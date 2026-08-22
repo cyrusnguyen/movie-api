@@ -1,7 +1,9 @@
 'use strict';
 
 const express = require('express');
-const bcrypt = require('bcrypt');
+// Pure JS: bcrypt needs node-gyp, which some hosts refuse to run at install
+// time. bcryptjs reads the same $2b$ hashes, so stored passwords still verify.
+const bcrypt = require('bcryptjs');
 
 const config = require('../config');
 const tokens = require('../services/tokens');

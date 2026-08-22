@@ -17,7 +17,7 @@
     "import": "node ./scripts/import-imdb.js"
   },
   "dependencies": {
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
     "better-sqlite3": "^11.5.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -28,7 +28,6 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
     "morgan": "^1.10.0",
-    "mysql2": "^3.11.4",
-    "swagger-ui-express": "^5.0.1"
+    "mysql2": "^3.11.4"
   }
 }

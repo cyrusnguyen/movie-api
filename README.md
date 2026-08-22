@@ -201,9 +201,26 @@ the URL and read the response:
 | Response | Meaning |
 |---|---|
 | `"JWT_SECRET is missing or too short"` | Set `JWT_SECRET` in the project's environment variables and redeploy. |
-| `"The database is unavailable"` | The SQLite driver would not load on this runtime. Set `DATABASE_URL` to use MySQL. |
+| `"The database is unavailable"` | `better-sqlite3` is a native addon and some hosts skip install scripts, so its binary is never built. Set `DATABASE_URL` to use MySQL — `mysql2` is pure JavaScript. |
 | `"The API failed to start"` | Something else threw during startup; `reason` names it and the full stack is in the function logs. |
 | Genuinely blank, or a login page | Not the API. Vercel protects preview deployments by default — check **Settings → Deployment Protection**, or open the link while signed in to the Vercel account that owns it. |
+
+#### Native dependencies
+
+Vercel's installer does not run package install scripts by default, which the
+build log reports as:
+
+```
+npm warn allow-scripts  better-sqlite3@11.10.0 (install: node-gyp rebuild)
+```
+
+`better-sqlite3` compiles a binary in that step, so on Vercel it has none and
+cannot load. Password hashing used to have the same problem and no longer does —
+`bcryptjs` is pure JavaScript and reads the same `$2b$` hashes. For the database,
+set `DATABASE_URL`: the MySQL driver is pure JavaScript too.
+
+Without it the API still serves its reference page and returns a clear 503 from
+the data routes rather than failing silently.
 
 #### A caveat about storage
 
