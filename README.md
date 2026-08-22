@@ -4,6 +4,13 @@ REST API for searching a movie catalogue, browsing cast and crew, and managing
 user accounts with JWT authentication. Built with Express, Knex and SQLite (or
 MySQL), documented with OpenAPI.
 
+## Screenshots
+
+The OpenAPI reference is served at the root, so `npm start` gives you a browsable,
+try-it-out console for every endpoint.
+
+![Swagger UI listing the Movies, People and Authentication endpoints](docs/screenshots/swagger.png)
+
 ---
 
 ## Quick start
