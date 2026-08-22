@@ -24,25 +24,60 @@ SQLite file at `data/movies.db` and loads the bundled catalogue on first run.
 - API reference (Swagger UI): <http://localhost:3000/>
 - Health check: <http://localhost:3000/health>
 
-## About the data
+## The catalogue
 
-The original deployment read an IMDB-derived dataset from a MySQL database on
-PlanetScale. PlanetScale ended its free tier in April 2024 and that database is
-gone, which is why the old hosted API stopped working.
+The API ships with a small **sample catalogue** — 98 films, 327 people, 459
+credits — committed as JSON in `data/seed/` and loaded automatically on first
+run. That is what makes a fresh clone work with no setup.
 
-`data/seed/` now holds a small **curated sample catalogue** — 98 films, 327
-people and 459 credits — committed as JSON and loaded by `npm run seed`. Titles,
-years, runtimes and credits are real. Ratings and box-office figures are
-approximate and rounded, and person IDs (`nm9000001`…) are generated for this
-project rather than real IMDB identifiers. It is enough to exercise every
-endpoint; it is not a substitute for the real dataset.
-
-To regenerate the JSON after editing the catalogue in
-`scripts/build-seed.js`:
+For a real catalogue, import IMDb's official dataset dumps:
 
 ```bash
-node scripts/build-seed.js   # rewrite data/seed/*.json
-npm run reset                # wipe and reload the database from it
+npm run import                      # ~6,000 films, 25,000+ votes, 1990 onwards
+npm run import -- --min-votes 5000  # ~20,000 films, deeper into the back catalogue
+npm run import -- --help            # all options
+```
+
+### This runs once, from your terminal
+
+The import is a one-off batch job, not something the server or the browser ever
+does:
+
+```
+you, once:   npm run import  →  downloads dumps  →  writes rows  →  exits
+from then:   browser  →  your API  →  your database
+```
+
+The server never contacts IMDb. Neither does the client. The dumps are cached in
+`data/.imdb-cache/` so re-importing does not re-download them; delete that
+directory to reclaim the space.
+
+### What the dumps do and do not contain
+
+IMDb has no free API — their official developer API is enterprise-priced — but
+they do publish free [dataset dumps](https://developer.imdb.com/non-commercial-datasets/),
+which is where this schema's column names come from.
+
+| Populated | Left null |
+|---|---|
+| title, year, runtime, genres | plot, poster, box office |
+| IMDb rating and vote counts | country, certificate |
+| cast, crew, characters | Rotten Tomatoes, Metacritic |
+| birth and death years | |
+
+The client handles the gaps: films without a poster get a generated gradient
+tile keyed to the title, and the plot and box-office sections hide themselves.
+
+The dumps are licensed for **personal and non-commercial use**, so they are
+downloaded locally and never committed. The committed sample catalogue is
+separate: titles, years and credits there are real, while ratings and
+box-office figures are approximate, and its person IDs (`nm9000001`…) are
+generated for this project rather than real IMDb identifiers.
+
+To go back to the sample catalogue at any time:
+
+```bash
+npm run reset
 ```
 
 ## Configuration
@@ -74,8 +109,9 @@ DATABASE_URL=mysql://user:password@host:3306/movies npm start
 | `npm run dev` | Same, restarting on file changes. |
 | `npm test` | Run the test suite against a throwaway database. |
 | `npm run migrate` | Apply migrations only. |
-| `npm run seed` | Load the catalogue if it is empty. |
-| `npm run reset` | Wipe and reload the catalogue. User accounts are left alone. |
+| `npm run seed` | Load the sample catalogue if the database is empty. |
+| `npm run reset` | Wipe and reload the sample catalogue. Accounts are untouched. |
+| `npm run import` | Replace the catalogue with IMDb's dataset dumps. Accounts are untouched. |
 
 ## Endpoints
 

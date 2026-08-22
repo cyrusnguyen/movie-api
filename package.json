@@ -13,7 +13,8 @@
     "rollback": "knex migrate:rollback",
     "seed": "node ./scripts/seed.js",
     "reset": "node ./scripts/seed.js --force",
-    "test": "node --test test/*.test.js"
+    "test": "node --test test/*.test.js",
+    "import": "node ./scripts/import-imdb.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
