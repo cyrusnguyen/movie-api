@@ -205,6 +205,10 @@ the URL and read the response:
 | `"The API failed to start"` | Something else threw during startup; `reason` names it and the full stack is in the function logs. |
 | Genuinely blank, or a login page | Not the API. Vercel protects preview deployments by default — check **Settings → Deployment Protection**, or open the link while signed in to the Vercel account that owns it. |
 
+"Try it out" in the reference sends its requests to whichever host served the
+page, so it works the same locally and on a deployment. No CORS setup is needed
+for it — the requests are same-origin.
+
 #### Native dependencies
 
 Vercel's installer does not run package install scripts by default, which the

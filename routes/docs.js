@@ -33,7 +33,27 @@ const CDN = `https://cdn.jsdelivr.net/npm/swagger-ui-dist@${SWAGGER_VERSION}`;
  */
 const CDN_CSP = 'https://cdn.jsdelivr.net';
 
-const page = `<!doctype html>
+/**
+ * The URL Swagger UI should send "Try it out" requests to.
+ *
+ * The spec used to hard-code http://localhost:3000 as its first server, and
+ * Swagger UI picks the first one — so the reference served from a deployment
+ * fired every request at the reader's own machine. Over HTTPS the browser
+ * refuses that as mixed content and reports only "Failed to fetch".
+ *
+ * Taking it from the request means the docs are always aimed at wherever they
+ * are being read from. `trust proxy` is set, so req.protocol honours
+ * X-Forwarded-Proto behind Vercel and other proxies.
+ */
+function originOf(req) {
+  return `${req.protocol}://${req.get('host')}`;
+}
+
+function specFor(origin) {
+  return { ...swaggerDocument, servers: [{ url: origin, description: 'This server' }] };
+}
+
+const pageFor = (origin) => `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -94,7 +114,7 @@ const page = `<!doctype html>
         }
 
         window.ui = SwaggerUIBundle({
-          spec: ${JSON.stringify(swaggerDocument)},
+          spec: ${JSON.stringify(specFor(origin))},
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis],
@@ -107,13 +127,21 @@ const page = `<!doctype html>
 </html>
 `;
 
+const pageCache = new Map();
+
 router.get('/', (req, res) => {
-  res.type('html').send(page);
+  const origin = originOf(req);
+
+  if (!pageCache.has(origin)) {
+    pageCache.set(origin, pageFor(origin));
+  }
+
+  res.type('html').send(pageCache.get(origin));
 });
 
 /** The raw spec, for generators and clients. */
 router.get('/openapi.json', (req, res) => {
-  res.json(swaggerDocument);
+  res.json(specFor(originOf(req)));
 });
 
 module.exports = router;

@@ -1483,12 +1483,8 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "Local development"
-    },
-    {
       "url": "/",
-      "description": "Same origin as these docs"
+      "description": "The server hosting this document"
     }
   ]
 }
