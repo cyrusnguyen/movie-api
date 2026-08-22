@@ -2,18 +2,38 @@
 
 require('dotenv').config();
 
-function requiredSecret() {
+const SECRET_HELP =
+  'JWT_SECRET must be set to a random string of at least 32 characters.\n' +
+  'Generate one with:  node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"\n' +
+  'then set it in your .env file locally, or in your host\'s environment variables.';
+
+/**
+ * Returns a message when JWT_SECRET is unusable, or null when it is fine.
+ *
+ * Checking without throwing matters on serverless: app.js is imported as the
+ * request handler, so an exception at module scope takes the whole function
+ * down and the platform serves a blank error page with no explanation. app.js
+ * uses this to answer with a clear 503 instead.
+ */
+function secretProblem() {
   const secret = process.env.JWT_SECRET;
 
   if (!secret || secret.length < 32) {
-    throw new Error(
-      'JWT_SECRET must be set to a random string of at least 32 characters.\n' +
-        'Generate one with:  node -e "console.log(require(\'crypto\').randomBytes(32).toString(\'hex\'))"\n' +
-        'then put it in your .env file (see .env.example).'
-    );
+    return SECRET_HELP;
   }
 
-  return secret;
+  return null;
+}
+
+/** Throws if the secret is unusable. Used where failing fast is right. */
+function requiredSecret() {
+  const problem = secretProblem();
+
+  if (problem) {
+    throw new Error(problem);
+  }
+
+  return process.env.JWT_SECRET;
 }
 
 /**
@@ -52,6 +72,8 @@ function corsOrigins() {
 
 module.exports = {
   requiredSecret,
+  secretProblem,
+  SECRET_HELP,
   TOKEN,
   PAGINATION,
   PASSWORD,

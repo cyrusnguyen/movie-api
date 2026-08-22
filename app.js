@@ -15,14 +15,21 @@ const config = require('./config');
 const knexConfig = require('./knexfile');
 const swaggerDocument = require('./docs/swagger.json');
 const { apiLimiter } = require('./middleware/rateLimit');
+const { ensureReadyMiddleware } = require('./db/bootstrap');
 
 const moviesRouter = require('./routes/movies');
 const peopleRouter = require('./routes/people');
 const usersRouter = require('./routes/users');
 const profileRouter = require('./routes/profile');
 
-// Fail loudly at boot rather than returning confusing 500s on the first login.
-config.requiredSecret();
+// Checked, not thrown: a throw at module scope would take down a serverless
+// function and serve a blank page. If it is missing, every route answers with
+// a 503 that says so (see below).
+const secretProblem = config.secretProblem();
+
+if (secretProblem) {
+  console.error(`\nRefusing to serve: ${secretProblem}\n`);
+}
 
 const knex = require('knex')(knexConfig);
 
@@ -77,6 +84,17 @@ app.use((req, res, next) => {
   next();
 });
 
+if (secretProblem) {
+  // Serve one honest error rather than failing to boot. The message names the
+  // missing setting; it reveals no secret and no internals.
+  app.use((req, res) => {
+    res.status(503).json({
+      error: true,
+      message: 'The API is not configured correctly: JWT_SECRET is missing or too short.',
+    });
+  });
+}
+
 app.get('/health', async (req, res) => {
   try {
     await req.db.raw('select 1');
@@ -87,11 +105,12 @@ app.get('/health', async (req, res) => {
   }
 });
 
-app.use('/movies', moviesRouter);
-app.use('/people', peopleRouter);
-app.use('/user', usersRouter);
+app.use('/movies', ensureReadyMiddleware, moviesRouter);
+app.use('/people', ensureReadyMiddleware, peopleRouter);
+app.use('/user', ensureReadyMiddleware, usersRouter);
 app.use(
   '/user/:email/profile',
+  ensureReadyMiddleware,
   (req, res, next) => {
     req.email = req.params.email;
     next();

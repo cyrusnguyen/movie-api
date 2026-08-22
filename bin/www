@@ -8,7 +8,9 @@
 const http = require('http');
 
 const app = require('../app');
+const config = require('../config');
 const knexConfig = require('../knexfile');
+const { ensureReady } = require('../db/bootstrap');
 
 const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
@@ -20,8 +22,17 @@ const server = http.createServer(app);
 start();
 
 async function start() {
+  // Running a real server, so fail fast and loudly on a bad secret rather than
+  // booting into a state where every request 503s.
   try {
-    await prepareDatabase();
+    config.requiredSecret();
+  } catch (err) {
+    console.error(`\n${err.message}\n`);
+    process.exit(1);
+  }
+
+  try {
+    await ensureReady(app.knex);
   } catch (err) {
     console.error('Database preparation failed:', err.message);
     process.exit(1);
@@ -30,24 +41,6 @@ async function start() {
   server.listen(port);
   server.on('error', onError);
   server.on('listening', onListening);
-}
-
-/**
- * Bring the schema up to date, and load the bundled catalogue the first time
- * the app runs so a fresh clone needs no extra setup step.
- */
-async function prepareDatabase() {
-  const knex = app.knex;
-
-  await knex.migrate.latest();
-
-  const [{ count }] = await knex('basics').count({ count: '*' });
-
-  if (Number(count) === 0) {
-    console.log('Empty catalogue detected — loading bundled sample data…');
-    const { seed } = require('../scripts/seed');
-    await seed({ quiet: true });
-  }
 }
 
 function normalizePort(val) {

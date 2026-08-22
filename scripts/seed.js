@@ -10,15 +10,21 @@
  * User accounts are never touched.
  */
 
-const fs = require('fs');
-const path = require('path');
-
 const config = require('../knexfile');
 
-const SEED_DIR = path.join(__dirname, '..', 'data', 'seed');
+/**
+ * Required rather than read from disk: a serverless bundler ships what it can
+ * see in a `require`, so an fs.readFileSync path is simply absent at runtime.
+ */
+const SEED = {
+  basics: require('../data/seed/basics.json'),
+  names: require('../data/seed/names.json'),
+  principals: require('../data/seed/principals.json'),
+  ratings: require('../data/seed/ratings.json'),
+};
 
 function readSeed(name) {
-  return JSON.parse(fs.readFileSync(path.join(SEED_DIR, `${name}.json`), 'utf8'));
+  return SEED[name];
 }
 
 /** SQLite caps the number of bound variables per statement, so insert in chunks. */

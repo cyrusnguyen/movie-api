@@ -172,14 +172,46 @@ The 2023 version had a number of problems that have since been fixed:
 
 ## Deployment
 
-This repository is not currently deployed — the previous Vercel and PlanetScale
-deployments are both gone. `vercel.json` and `Dockerfile` are kept up to date so
-it can be redeployed.
+### Vercel
 
-Wherever you host it, set `JWT_SECRET` and `CORS_ORIGIN`, and set `DATABASE_URL`
-to a real MySQL instance. The bundled SQLite file is fine for local use and
-demos, but most serverless platforms have an ephemeral or read-only filesystem,
-so writes (registration, login) will not survive.
+The repo is Vercel-ready: `api/index.js` exports the Express app as a serverless
+function and `vercel.json` rewrites every path to it.
+
+**Set `JWT_SECRET` in the Vercel project's environment variables before
+deploying.** Without it the API refuses to serve and answers every request with
+a 503 saying so. Generate one with:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+Also set `CORS_ORIGIN` to the origin of whatever front end will call it.
+
+| Variable | On Vercel |
+|---|---|
+| `JWT_SECRET` | **Required.** 32+ characters. |
+| `CORS_ORIGIN` | Your front end's origin, e.g. `https://your-app.vercel.app`. |
+| `DATABASE_URL` | Optional but recommended — see below. |
+
+#### A caveat about storage
+
+Serverless filesystems are read-only apart from `/tmp`, and instances are
+recycled without warning. With no `DATABASE_URL`, the API rebuilds the SQLite
+database in `/tmp` from the committed sample catalogue on each cold start. That
+means:
+
+- searching, film pages and person pages work fine
+- accounts and profiles are written successfully, but **disappear whenever the
+  instance recycles**
+
+Good enough to demonstrate the API; not a real deployment. Point `DATABASE_URL`
+at a hosted MySQL instance for durable accounts. Migrations run automatically on
+the first request that needs them, so no separate migration step is required.
+
+### A host with a disk
+
+For persistent SQLite and no cold starts, deploy to something with a real
+filesystem — Render, Fly.io and Railway all work. `Dockerfile` is kept current:
 
 ```bash
 docker build -t movie-api .
