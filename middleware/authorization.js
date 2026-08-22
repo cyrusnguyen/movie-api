@@ -3,6 +3,21 @@
 const tokens = require('../services/tokens');
 
 /**
+ * Response bodies are user-facing, so they say what happened, not how the
+ * mechanism works. The scheme and the machine-readable reason belong in the
+ * WWW-Authenticate header, which is where RFC 6750 puts them and where an API
+ * client will look for them.
+ */
+function challenge(res, { error, description } = {}) {
+  const parts = ['Bearer realm="api"'];
+
+  if (error) parts.push(`error="${error}"`);
+  if (description) parts.push(`error_description="${description}"`);
+
+  res.set('WWW-Authenticate', parts.join(', '));
+}
+
+/**
  * Requires a valid `Authorization: Bearer <token>` header and attaches the
  * decoded payload to req.auth.
  *
@@ -12,15 +27,10 @@ const tokens = require('../services/tokens');
 function requireAuth(req, res, next) {
   const header = req.headers.authorization;
 
-  if (!header) {
-    return res.status(401).json({
-      error: true,
-      message: "Authorization header ('Bearer token') not found",
-    });
-  }
+  if (!header || !/^Bearer \S+$/.test(header)) {
+    challenge(res, header ? { error: 'invalid_request' } : undefined);
 
-  if (!/^Bearer \S+$/.test(header)) {
-    return res.status(401).json({ error: true, message: 'Authorization header is malformed' });
+    return res.status(401).json({ error: true, message: 'Authentication required' });
   }
 
   const token = header.slice('Bearer '.length);
@@ -28,9 +38,13 @@ function requireAuth(req, res, next) {
   try {
     req.auth = tokens.verify(token);
   } catch (err) {
+    const expired = err.name === 'TokenExpiredError';
+
+    challenge(res, { error: 'invalid_token', description: expired ? 'expired' : 'invalid' });
+
     return res.status(401).json({
       error: true,
-      message: err.name === 'TokenExpiredError' ? 'JWT token has expired' : 'Invalid JWT token',
+      message: expired ? 'Your session has expired' : 'Authentication failed',
     });
   }
 

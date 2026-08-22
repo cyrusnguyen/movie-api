@@ -116,7 +116,7 @@ router.post('/refresh', authLimiter, async (req, res, next) => {
     const result = await tokens.consumeRefreshToken(req.db, refreshToken);
 
     if (result.status === 'expired') {
-      return res.status(401).json({ error: true, message: 'JWT token has expired' });
+      return res.status(401).json({ error: true, message: 'Your session has expired' });
     }
 
     if (result.status === 'reused') {
@@ -133,11 +133,11 @@ router.post('/refresh', authLimiter, async (req, res, next) => {
         await tokens.revokeAllForUser(req.db, payload.email);
       }
 
-      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+      return res.status(401).json({ error: true, message: 'Authentication failed' });
     }
 
     if (result.status !== 'ok') {
-      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+      return res.status(401).json({ error: true, message: 'Authentication failed' });
     }
 
     // Rotate: the token just spent is gone, and a fresh one takes its place in
@@ -168,11 +168,11 @@ router.post('/logout', async (req, res, next) => {
     const result = await tokens.consumeRefreshToken(req.db, refreshToken);
 
     if (result.status === 'invalid') {
-      return res.status(401).json({ error: true, message: 'Invalid JWT token' });
+      return res.status(401).json({ error: true, message: 'Authentication failed' });
     }
 
     if (result.status === 'expired') {
-      return res.status(401).json({ error: true, message: 'JWT token has expired' });
+      return res.status(401).json({ error: true, message: 'Your session has expired' });
     }
 
     // Log out everywhere this session reached, not just this one token.
