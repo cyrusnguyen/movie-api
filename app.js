@@ -19,7 +19,6 @@ const { apiLimiter } = require('./middleware/rateLimit');
 const moviesRouter = require('./routes/movies');
 const peopleRouter = require('./routes/people');
 const usersRouter = require('./routes/users');
-const meRouter = require('./routes/me');
 const profileRouter = require('./routes/profile');
 
 // Fail loudly at boot rather than returning confusing 500s on the first login.
@@ -88,7 +87,6 @@ app.get('/health', async (req, res) => {
   }
 });
 
-app.use('/me', meRouter);
 app.use('/movies', moviesRouter);
 app.use('/people', peopleRouter);
 app.use('/user', usersRouter);

@@ -4,8 +4,6 @@ REST API for searching a movie catalogue, browsing cast and crew, and managing
 user accounts with JWT authentication. Built with Express, Knex and SQLite (or
 MySQL), documented with OpenAPI.
 
-Originally built as a QUT coursework project; revived and hardened since.
-
 ---
 
 ## Quick start
@@ -93,7 +91,6 @@ DATABASE_URL=mysql://user:password@host:3306/movies npm start
 | `GET` | `/user/{email}/profile` | optional | Three fields publicly, five to the owner. |
 | `PUT` | `/user/{email}/profile` | Bearer | Owner-only update. |
 | `GET` | `/health` | — | Liveness and database connectivity. |
-| `GET` | `/me` | — | Author details. |
 
 Full request and response schemas are in the Swagger UI at `/`.
 
