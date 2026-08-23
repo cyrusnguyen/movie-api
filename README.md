@@ -267,11 +267,36 @@ for a one-off `docker run` but is lost on the next `docker build`.
 check on `/health`, and `SQLITE_FILE` already pointed at the volume.
 
 ```bash
-fly launch --no-deploy        # reuses fly.toml; pick a unique app name if asked
+fly launch --no-deploy        # reuses fly.toml and asks for an app name
 fly volumes create movie_data --region syd --size 1
-fly secrets set JWT_SECRET=$(openssl rand -hex 32)
+fly secrets set JWT_SECRET=$(node -e "console.log(require('crypto').randomBytes(32).toString('hex'))")
 fly deploy
 ```
+
+**Start with `fly launch`, not `fly deploy`.** `fly launch` is what creates the
+app under your account and writes its name into `fly.toml`. Fly app names are
+globally unique across every account — the name becomes `<app>.fly.dev` — so
+generic ones are already taken, and deploying to a name you do not own fails
+with an error that sounds like a login problem but is not:
+
+```
+error listing active machines for <name> app: failed to list VMs: unauthorized
+```
+
+Check with `fly auth whoami` (are you logged in?) and `fly apps list` (do you
+own that name?). If the name is taken, pick another — `fly launch` will offer
+one, or create it explicitly and pass it through:
+
+```bash
+fly apps create movie-api-yourname
+fly volumes create movie_data --app movie-api-yourname --region syd --size 1
+fly secrets set JWT_SECRET=... --app movie-api-yourname
+fly deploy --app movie-api-yourname
+```
+
+On Windows PowerShell, `openssl` may not be installed — the `node -e` command
+above works everywhere Node does. Generating the secret inline like this keeps
+it out of your shell history.
 
 Then, once the frontend has a URL — or any time it changes:
 

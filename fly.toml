@@ -1,8 +1,14 @@
 # Fly.io app configuration. See https://fly.io/docs/reference/configuration/
 #
-# `app` is a placeholder — `fly launch` will ask to rename it if the name is
-# already taken, and rewrites this line either way.
-app = "movie-api"
+# CHANGE THIS NAME. Fly app names are globally unique across every Fly account —
+# the name becomes <app>.fly.dev — so short generic ones are long since taken.
+# Deploying to a name someone else owns fails with a misleading error:
+#
+#   error listing active machines: failed to list VMs: unauthorized
+#
+# That is not a login problem. It means the app exists and is not yours.
+# `fly launch` picks a free name for you and rewrites this line; see the README.
+app = "movie-api-changeme"
 primary_region = "syd"
 
 [build]
