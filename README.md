@@ -273,14 +273,33 @@ fly secrets set JWT_SECRET=$(openssl rand -hex 32)
 fly deploy
 ```
 
-- **`JWT_SECRET` is a secret, not an environment variable.** `fly secrets set`
-  stores it encrypted and injects it at runtime; `fly.toml`'s `[env]` block is
-  plain text committed to the repo, so it is never the right place for it.
+Then, once the frontend has a URL — or any time it changes:
+
+```bash
+fly secrets set CORS_ORIGIN=https://your-frontend.vercel.app
+```
+
+- **Anything that varies per environment goes in `fly secrets`, not
+  `fly.toml`.** Despite the name, `fly secrets` is Fly's runtime environment:
+  values are injected into the running machines and applied by a rolling
+  restart, so changing one needs no code change, no commit and no rebuild.
+  `fly.toml`'s `[env]` block is committed plain text baked in at deploy time,
+  which suits `PORT` and `SQLITE_FILE` — identical on every deploy — and suits
+  `CORS_ORIGIN` and `JWT_SECRET` badly.
+- `JWT_SECRET` has the additional reason that it is a credential: it signs auth
+  tokens, so anyone holding it can forge a login for any account. It must never
+  be committed. `CORS_ORIGIN` is not sensitive — a frontend URL is public by
+  definition — it simply belongs with the config that changes.
+- Pass several origins as one comma-separated value, e.g. a production domain
+  and a staging one:
+  `fly secrets set CORS_ORIGIN=https://app.example.com,https://staging.example.com`
+- Until `CORS_ORIGIN` is set, the API falls back to allowing `localhost:5173`
+  only, so a deployed frontend's requests are refused by the browser. The API
+  itself still serves fine — the reference page and `curl` are unaffected,
+  since neither is subject to CORS.
 - The volume makes the catalogue and any accounts durable across deploys and
   restarts — unlike the Vercel deployment above, which rebuilds SQLite from
   the sample catalogue on every cold start.
-- Once the frontend has a real URL, uncomment and set `CORS_ORIGIN` in
-  `fly.toml` and `fly deploy` again.
 - `primary_region` defaults to `syd`; change it in `fly.toml` to deploy closer
   to your users, and create the volume in the same region.
 

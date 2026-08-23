@@ -7,16 +7,19 @@ primary_region = "syd"
 
 [build]
 
+# Only settings that are the same on every deploy belong here — this file is
+# committed, and changing it means a commit and a rebuild.
+#
+# CORS_ORIGIN is deliberately NOT here: it differs per environment and changes
+# whenever the frontend moves. `fly secrets set CORS_ORIGIN=...` sets it at
+# runtime, with no code change and no redeploy. Same for JWT_SECRET, which
+# additionally must never be committed. See the README.
 [env]
   PORT = "3000"
   NODE_ENV = "production"
   # The volume mounted below. better-sqlite3 needs the database file itself
   # to live on it, or every deploy starts from an empty catalogue again.
   SQLITE_FILE = "/data/movies.db"
-  # Set to the deployed frontend's origin once you have one, e.g.
-  # CORS_ORIGIN = "https://your-frontend.vercel.app"
-  # then `fly deploy` again — env vars here are not secret, but nothing in
-  # this file needs to be, unlike JWT_SECRET (see README: use `fly secrets set`).
 
 [mounts]
   source = "movie_data"
