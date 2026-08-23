@@ -304,3 +304,28 @@ describe('profile', () => {
     assert.equal(res.body.address, 'Brisbane QLD');
   });
 });
+
+describe('CORS configuration', () => {
+  it('tolerates a trailing slash and a comma-separated list', () => {
+    // A URL copied from the address bar carries a trailing slash, but the
+    // Origin header never does. Without normalising, the exact-match check in
+    // app.js silently refuses the very site the setting was meant to allow.
+    const original = process.env.CORS_ORIGIN;
+
+    const load = () => {
+      delete require.cache[require.resolve('../config')];
+      return require('../config').corsOrigins();
+    };
+
+    try {
+      process.env.CORS_ORIGIN = 'https://site.com/';
+      assert.deepEqual(load(), ['https://site.com']);
+
+      process.env.CORS_ORIGIN = 'https://a.vercel.app/, https://b.example.com';
+      assert.deepEqual(load(), ['https://a.vercel.app', 'https://b.example.com']);
+    } finally {
+      process.env.CORS_ORIGIN = original;
+      delete require.cache[require.resolve('../config')];
+    }
+  });
+});

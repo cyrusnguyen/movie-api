@@ -57,6 +57,27 @@ const PASSWORD = {
   maxLength: 128,
 };
 
+/**
+ * Reduces a configured value to the exact string a browser sends as `Origin`.
+ *
+ * An Origin header is scheme + host + port and nothing else — no path, no
+ * trailing slash. But a URL copied from the address bar has a trailing slash,
+ * and the comparison in app.js is an exact match, so `https://site.com/` never
+ * matches the `https://site.com` the browser actually sends. The request is
+ * then refused with a CORS error that says nothing about the stray character.
+ *
+ * Normalising here makes the setting forgiving of how people really copy URLs.
+ */
+function toOrigin(value) {
+  try {
+    return new URL(value).origin;
+  } catch {
+    // Not a parseable URL — keep it as typed so a misconfiguration surfaces as
+    // a refusal rather than being silently rewritten into something else.
+    return value;
+  }
+}
+
 function corsOrigins() {
   const raw = process.env.CORS_ORIGIN;
 
@@ -67,7 +88,8 @@ function corsOrigins() {
   return raw
     .split(',')
     .map((origin) => origin.trim())
-    .filter(Boolean);
+    .filter(Boolean)
+    .map(toOrigin);
 }
 
 module.exports = {
