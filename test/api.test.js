@@ -12,6 +12,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
+const http = require('node:http');
 const { after, before, describe, it } = require('node:test');
 
 const TMP_DB = path.join(os.tmpdir(), `movie-api-test-${process.pid}.db`);
@@ -327,5 +328,42 @@ describe('CORS configuration', () => {
       process.env.CORS_ORIGIN = original;
       delete require.cache[require.resolve('../config')];
     }
+  });
+});
+
+describe('API reference page', () => {
+  // node:http rather than fetch: Host is a forbidden header for fetch, and
+  // setting it is the whole point of this test.
+  const getWithHost = (host) =>
+    new Promise((resolve, reject) => {
+      const { port } = server.address();
+      const req = http.request(
+        { host: '127.0.0.1', port, path: '/', method: 'GET', headers: { Host: host } },
+        (res) => {
+          let body = '';
+          res.on('data', (c) => (body += c));
+          res.on('end', () => resolve({ status: res.statusCode, body }));
+        }
+      );
+      req.on('error', reject);
+      req.end();
+    });
+
+  it('does not let the Host header inject script into the inlined spec', async () => {
+    // JSON.stringify escapes quotes but not `<`, so a Host containing
+    // `</script>` used to close the tag early and run what followed.
+    const res = await getWithHost('evil.com</script><script>alert(1)</script>');
+
+    assert.equal(res.status, 200);
+    assert.ok(!res.body.includes('alert(1)'), 'Host header payload reached the page');
+    assert.ok(!res.body.includes('evil.com'), 'Host header is reflected into the page');
+  });
+
+  it('targets the serving origin with a relative server URL', async () => {
+    // A hard-coded absolute URL broke "Try it out" on every deployment, and
+    // building one from the request was what opened the injection.
+    const { body } = await json('/openapi.json');
+
+    assert.deepEqual(body.servers, [{ url: '/', description: 'This server' }]);
   });
 });

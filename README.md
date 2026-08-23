@@ -170,6 +170,39 @@ The 2023 version had a number of problems that have since been fixed:
 `helmet` sets security headers, request bodies are capped at 16 KB, and the
 `/knex` endpoint that reported the database version has been removed.
 
+### Found in review, since fixed
+
+Two defects in the rewritten reference page, both introduced while fixing the
+blank-page problem on serverless and both caught by a later audit:
+
+- **Reflected XSS through the `Host` header.** The page inlines the OpenAPI
+  spec into a `<script>` block, and the spec's server URL was built from
+  `req.get('host')`. `JSON.stringify` escapes quotes and backslashes but not
+  `<`, so a `Host` containing `</script>` closed the block early and everything
+  after it ran as script. The spec now uses a **relative** server URL (`/`),
+  which Swagger UI resolves against whatever origin served the page — the
+  request is never consulted, so there is nothing to inject. Values inlined
+  into script are additionally escaped (`<`, `>`, `&`, U+2028, U+2029).
+- **Unbounded memory growth.** The rendered page was cached in a `Map` keyed by
+  that same `Host`, so a caller sending a fresh `Host` each request grew the map
+  until the process ran out of memory. There is now one page for every caller.
+
+Both are covered by tests, and "Try it out" was re-verified end to end against
+the real Swagger UI bundle in Chromium.
+
+### Known and accepted
+
+- **The reference page allows inline script in its CSP.** It boots Swagger UI
+  with an inline `<script>`, so `script-src` includes `'unsafe-inline'`. With
+  the `Host` reflection gone, no user-controlled value reaches that page, so
+  there is no injection point for it to enable — but it is weaker than the
+  front end's policy, and moving to a hash would close it.
+- **Swagger UI's assets load from a CDN without Subresource Integrity.** A
+  compromise of `cdn.jsdelivr.net` could serve modified script to the reference
+  page. Adding `integrity` hashes would pin them.
+- **The front end stores tokens in `localStorage`.** See that repo's README for
+  why, and for the layered mitigations.
+
 ## Deployment
 
 ### Vercel

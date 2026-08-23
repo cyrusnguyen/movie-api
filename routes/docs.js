@@ -36,24 +36,43 @@ const CDN_CSP = 'https://cdn.jsdelivr.net';
 /**
  * The URL Swagger UI should send "Try it out" requests to.
  *
- * The spec used to hard-code http://localhost:3000 as its first server, and
- * Swagger UI picks the first one — so the reference served from a deployment
- * fired every request at the reader's own machine. Over HTTPS the browser
- * refuses that as mixed content and reports only "Failed to fetch".
+ * The spec used to hard-code http://localhost:3000, and Swagger UI picks the
+ * first server — so the reference served from a deployment fired every request
+ * at the reader's own machine, which over HTTPS the browser refuses as mixed
+ * content, reporting only "Failed to fetch".
  *
- * Taking it from the request means the docs are always aimed at wherever they
- * are being read from. `trust proxy` is set, so req.protocol honours
- * X-Forwarded-Proto behind Vercel and other proxies.
+ * A *relative* URL fixes that without consulting the request at all: Swagger UI
+ * resolves it against the page's own origin, so the docs always target whatever
+ * host served them, on any deployment.
+ *
+ * The previous version built this from `req.get('host')`, which was a mistake.
+ * The Host header is attacker-controlled, and it was interpolated into the
+ * inline <script> below via JSON.stringify — which escapes quotes but not `<`,
+ * so a Host containing `</script>` closed the tag and everything after it ran
+ * as script. Not taking the value at all removes the vector outright, and it
+ * also means one cacheable page instead of one per Host seen.
  */
-function originOf(req) {
-  return `${req.protocol}://${req.get('host')}`;
+const SPEC = { ...swaggerDocument, servers: [{ url: '/', description: 'This server' }] };
+
+/**
+ * JSON safe to sit inside a <script> block.
+ *
+ * JSON.stringify alone is not: `<` passes through untouched, so `</script>` in
+ * any string value ends the block early. U+2028 and U+2029 are valid in JSON
+ * but are line terminators in older JS parsers. Belt and braces — nothing
+ * user-controlled reaches this any more, but the next person to add a field
+ * should not have to rediscover that.
+ */
+function inlineJson(value) {
+  return JSON.stringify(value)
+    .replace(/</g, '\\u003c')
+    .replace(/>/g, '\\u003e')
+    .replace(/&/g, '\\u0026')
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
 }
 
-function specFor(origin) {
-  return { ...swaggerDocument, servers: [{ url: origin, description: 'This server' }] };
-}
-
-const pageFor = (origin) => `<!doctype html>
+const page = `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -114,7 +133,7 @@ const pageFor = (origin) => `<!doctype html>
         }
 
         window.ui = SwaggerUIBundle({
-          spec: ${JSON.stringify(specFor(origin))},
+          spec: ${inlineJson(SPEC)},
           dom_id: '#swagger-ui',
           deepLinking: true,
           presets: [SwaggerUIBundle.presets.apis],
@@ -127,21 +146,16 @@ const pageFor = (origin) => `<!doctype html>
 </html>
 `;
 
-const pageCache = new Map();
-
+// One page for every caller, built once. The previous version kept a Map keyed
+// by the request's Host, which an attacker could grow without bound by sending
+// a fresh Host each time until the process ran out of memory.
 router.get('/', (req, res) => {
-  const origin = originOf(req);
-
-  if (!pageCache.has(origin)) {
-    pageCache.set(origin, pageFor(origin));
-  }
-
-  res.type('html').send(pageCache.get(origin));
+  res.type('html').send(page);
 });
 
 /** The raw spec, for generators and clients. */
 router.get('/openapi.json', (req, res) => {
-  res.json(specFor(originOf(req)));
+  res.json(SPEC);
 });
 
 module.exports = router;
